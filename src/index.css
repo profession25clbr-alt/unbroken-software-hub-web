@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-steel-950: #0a0b0d;
+  --color-steel-900: #101216;
+  --color-steel-800: #16191f;
+  --color-steel-700: #1f232b;
+  --color-steel-600: #2b303a;
+  --color-steel-500: #3d4451;
+  --color-steel-400: #626b7a;
+  --color-steel-300: #8f96a3;
+  --color-steel-200: #c2c6cd;
+  --color-steel-100: #eceef1;
+
+  --color-ember-600: #d63a12;
+  --color-ember-500: #f0491a;
+  --color-ember-400: #ff6a2b;
+  --color-ember-300: #ff9857;
+  --color-ember-200: #ffc199;
+
+  --color-gold-400: #ffb84d;
+  --color-gold-300: #ffd085;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-steel-950);
+  color: var(--color-steel-100);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: var(--color-ember-500);
+  color: var(--color-steel-950);
+}
+
+.text-gradient-ember {
+  background-image: linear-gradient(90deg, var(--color-ember-400), var(--color-gold-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-noise {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
+  background-size: 22px 22px;
+}
