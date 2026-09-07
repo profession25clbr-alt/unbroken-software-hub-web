@@ -23,6 +23,170 @@
 
   --color-gold-400: #ffb84d;
   --color-gold-300: #ffd085;
+
+  --color-glow: #ff4d1f;
+  --color-noise: rgba(255, 255, 255, 0.035);
+}
+
+/* Alternate palettes — swapped at runtime via data-theme on <html>.
+   Utilities like bg-ember-400 read var(--color-ember-400), so overriding
+   these custom properties re-themes the whole site instantly. */
+:root[data-theme="volt"] {
+  --color-steel-950: #060a12;
+  --color-steel-900: #0b1220;
+  --color-steel-800: #101a2c;
+  --color-steel-700: #16233a;
+  --color-steel-600: #223454;
+
+  --color-ember-600: #0b5fb0;
+  --color-ember-500: #1d7fe0;
+  --color-ember-400: #3aa0ff;
+  --color-ember-300: #7cc4ff;
+  --color-ember-200: #b8e0ff;
+
+  --color-gold-400: #5be3ff;
+  --color-gold-300: #a0f0ff;
+
+  --color-glow: #2f8dff;
+}
+
+:root[data-theme="toxic"] {
+  --color-steel-950: #060b08;
+  --color-steel-900: #0a120d;
+  --color-steel-800: #0f1a13;
+  --color-steel-700: #16241b;
+  --color-steel-600: #223526;
+
+  --color-ember-600: #1a9c3f;
+  --color-ember-500: #22c55e;
+  --color-ember-400: #4ade80;
+  --color-ember-300: #86efac;
+  --color-ember-200: #bbf7d0;
+
+  --color-gold-400: #d4f571;
+  --color-gold-300: #e8fabb;
+
+  --color-glow: #35d16b;
+}
+
+:root[data-theme="royal"] {
+  --color-steel-950: #0a0713;
+  --color-steel-900: #120c1e;
+  --color-steel-800: #19122a;
+  --color-steel-700: #241a3c;
+  --color-steel-600: #33254f;
+
+  --color-ember-600: #7a2ec9;
+  --color-ember-500: #9645e8;
+  --color-ember-400: #b16bff;
+  --color-ember-300: #cf9dff;
+  --color-ember-200: #e5c8ff;
+
+  --color-gold-400: #ff6ec7;
+  --color-gold-300: #ffa9dd;
+
+  --color-glow: #a855f7;
+}
+
+/* Light-background variants — same hues, inverted scale */
+:root[data-theme="forge-light"] {
+  --color-steel-950: #faf7f2;
+  --color-steel-900: #f2ede5;
+  --color-steel-800: #e8e0d3;
+  --color-steel-700: #d9cebb;
+  --color-steel-600: #c2b39a;
+  --color-steel-500: #9c8b6f;
+  --color-steel-400: #7a6b54;
+  --color-steel-300: #5c5140;
+  --color-steel-200: #3a3226;
+  --color-steel-100: #221d15;
+
+  --color-ember-600: #7c2809;
+  --color-ember-500: #c2410c;
+  --color-ember-400: #a8380c;
+  --color-ember-300: #d9591c;
+  --color-ember-200: #f0855a;
+
+  --color-gold-400: #a9660a;
+  --color-gold-300: #c98a1f;
+
+  --color-glow: #c2410c;
+  --color-noise: rgba(30, 22, 10, 0.05);
+}
+
+:root[data-theme="volt-light"] {
+  --color-steel-950: #f4f8fc;
+  --color-steel-900: #e9f1fa;
+  --color-steel-800: #d7e6f5;
+  --color-steel-700: #bdd5ec;
+  --color-steel-600: #9cbfe0;
+  --color-steel-500: #6f97bf;
+  --color-steel-400: #4f7699;
+  --color-steel-300: #345676;
+  --color-steel-200: #1f3a52;
+  --color-steel-100: #0e2033;
+
+  --color-ember-600: #0a4c8c;
+  --color-ember-500: #0f6fc7;
+  --color-ember-400: #0b5fb0;
+  --color-ember-300: #2e86d6;
+  --color-ember-200: #6fb0e8;
+
+  --color-gold-400: #0891a8;
+  --color-gold-300: #2bb3cc;
+
+  --color-glow: #0f6fc7;
+  --color-noise: rgba(10, 25, 45, 0.045);
+}
+
+:root[data-theme="toxic-light"] {
+  --color-steel-950: #f5faf3;
+  --color-steel-900: #eaf5e5;
+  --color-steel-800: #d8ecce;
+  --color-steel-700: #bfdfad;
+  --color-steel-600: #9fca84;
+  --color-steel-500: #74a656;
+  --color-steel-400: #52803a;
+  --color-steel-300: #396126;
+  --color-steel-200: #234016;
+  --color-steel-100: #12240b;
+
+  --color-ember-600: #1d6b31;
+  --color-ember-500: #22913f;
+  --color-ember-400: #1f7d38;
+  --color-ember-300: #38a352;
+  --color-ember-200: #7ac98e;
+
+  --color-gold-400: #6b8f0e;
+  --color-gold-300: #8bb01a;
+
+  --color-glow: #22913f;
+  --color-noise: rgba(15, 35, 15, 0.045);
+}
+
+:root[data-theme="royal-light"] {
+  --color-steel-950: #faf6fd;
+  --color-steel-900: #f2e8fb;
+  --color-steel-800: #e6d3f6;
+  --color-steel-700: #d4b5ee;
+  --color-steel-600: #bd91e3;
+  --color-steel-500: #9865c4;
+  --color-steel-400: #77489e;
+  --color-steel-300: #5a3378;
+  --color-steel-200: #3c2050;
+  --color-steel-100: #21102c;
+
+  --color-ember-600: #6d21a8;
+  --color-ember-500: #8a2fd1;
+  --color-ember-400: #7b28ba;
+  --color-ember-300: #9c52d6;
+  --color-ember-200: #c48ee8;
+
+  --color-gold-400: #a8137a;
+  --color-gold-300: #c93a9a;
+
+  --color-glow: #8a2fd1;
+  --color-noise: rgba(30, 10, 40, 0.045);
 }
 
 html {
@@ -33,6 +197,11 @@ body {
   background-color: var(--color-steel-950);
   color: var(--color-steel-100);
   font-family: var(--font-sans);
+}
+
+/* Smooth crossfade when the palette changes */
+* {
+  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.3s ease;
 }
 
 ::selection {
@@ -48,6 +217,6 @@ body {
 }
 
 .bg-noise {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, var(--color-noise) 1px, transparent 0);
   background-size: 22px 22px;
 }

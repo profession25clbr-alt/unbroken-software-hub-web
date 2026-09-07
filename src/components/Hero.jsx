@@ -16,7 +16,7 @@ export default function Hero() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div
           className="h-[420px] w-[680px] max-w-[90vw] rounded-full blur-[110px] opacity-[0.22]"
-          style={{ background: "radial-gradient(circle, #ff4d1f 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, var(--color-glow) 0%, transparent 70%)" }}
         />
       </div>
 

@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react"
 import Logo from "./Logo"
+import ThemeSwitcher from "./ThemeSwitcher"
 
 const LINKS = [
   { href: "#servicios", label: "Servicios" },
   { href: "#planes", label: "Planes" },
   { href: "#proceso", label: "Proceso" },
 ]
-
-const WHATSAPP_HREF =
-  "https://wa.me/56934142633?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20con%20Everforged%20Software"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -28,9 +26,12 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto max-w-[1400px] px-6 h-16 flex items-center justify-between">
-        <a href="#top" aria-label="Everforged Software - inicio">
-          <Logo />
-        </a>
+        <div className="flex items-center gap-3">
+          <ThemeSwitcher />
+          <a href="#top" aria-label="Everforged Software - inicio">
+            <Logo />
+          </a>
+        </div>
 
         <ul className="hidden md:flex items-center gap-8 text-base text-steel-300">
           {LINKS.map((link) => (
@@ -41,15 +42,6 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-
-        <a
-          href={WHATSAPP_HREF}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center rounded-full bg-ember-500 hover:bg-ember-400 text-steel-950 font-medium text-base px-4 py-2 transition-colors"
-        >
-          Hablemos
-        </a>
 
         <button
           onClick={() => setOpen((v) => !v)}
@@ -85,15 +77,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <a
-            href={WHATSAPP_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="mt-4 inline-flex items-center rounded-full bg-ember-500 text-steel-950 font-medium text-base px-4 py-2"
-          >
-            Hablemos
-          </a>
         </div>
       )}
     </header>

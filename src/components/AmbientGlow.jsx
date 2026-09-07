@@ -20,7 +20,7 @@ export default function AmbientGlow() {
             width: blob.size,
             opacity: blob.opacity,
             transform: "translate(-50%, -50%)",
-            background: "radial-gradient(circle, #ff4d1f 0%, transparent 70%)",
+            background: "radial-gradient(circle, var(--color-glow) 0%, transparent 70%)",
           }}
         />
       ))}

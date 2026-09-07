@@ -11,8 +11,8 @@ export default function Logo({ className = "" }) {
         <path d="M14 9 L18.5 14 L14 19 L9.5 14 Z" fill="url(#logo-grad)" />
         <defs>
           <linearGradient id="logo-grad" x1="4" y1="2" x2="24" y2="26" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#ff9857" />
-            <stop offset="1" stopColor="#d63a12" />
+            <stop stopColor="var(--color-ember-300)" />
+            <stop offset="1" stopColor="var(--color-ember-600)" />
           </linearGradient>
         </defs>
       </svg>
