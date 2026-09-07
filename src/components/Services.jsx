@@ -1,38 +1,38 @@
 import { motion } from "framer-motion"
-import { HiOutlineCodeBracket, HiOutlineGlobeAlt, HiOutlineCog6Tooth, HiOutlineArrowPath } from "react-icons/hi2"
+import { HiOutlineCodeBracket, HiOutlineGlobeAlt, HiOutlineArrowPath, HiOutlineSparkles } from "react-icons/hi2"
 import SectionHeading from "./SectionHeading"
 
 const SERVICES = [
   {
     icon: HiOutlineCodeBracket,
-    title: "Software a medida",
+    title: "Sistemas a medida",
     description:
-      "Sistemas internos, herramientas de gestión y automatizaciones diseñadas alrededor de cómo trabaja tu equipo, no al revés.",
+      "Herramientas para gestionar tu negocio del día a día: pedidos, inventario, clientes, procesos internos. Se construyen alrededor de cómo trabajas tú, no de un molde genérico.",
   },
   {
     icon: HiOutlineGlobeAlt,
     title: "Sitios y páginas web",
     description:
-      "Landing pages, sitios corporativos y plataformas web rápidas, responsivas y con una experiencia de usuario cuidada al detalle.",
-  },
-  {
-    icon: HiOutlineCog6Tooth,
-    title: "Integraciones y APIs",
-    description:
-      "Conexión entre tus sistemas, pasarelas de pago, servicios externos y automatización de procesos manuales.",
+      "Sitios corporativos, landing pages y tiendas online rápidas y fáciles de usar, pensadas para que quien te visite entienda tu servicio y te contacte.",
   },
   {
     icon: HiOutlineArrowPath,
-    title: "Soporte y evolución",
+    title: "Automatización de procesos",
     description:
-      "Acompañamiento post-lanzamiento: mejoras continuas, nuevas funcionalidades y mantención del producto en el tiempo.",
+      "Conecto tus sistemas entre sí y con herramientas como WhatsApp, correo o planillas, para que tareas repetitivas dejen de hacerse a mano.",
+  },
+  {
+    icon: HiOutlineSparkles,
+    title: "Inteligencia artificial aplicada",
+    description:
+      "Si tu negocio se beneficia de responder consultas automáticamente, clasificar información o generar contenido, evaluamos juntos qué tan grande es la necesidad y el costo real de resolverla.",
   },
 ]
 
 export default function Services() {
   return (
     <section id="servicios" className="py-24 md:py-32 border-t border-steel-800">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-[1400px] px-6">
         <SectionHeading
           eyebrow="Servicios"
           title="Lo que puedo construir para ti"
@@ -52,10 +52,10 @@ export default function Services() {
               <div className="h-11 w-11 rounded-xl bg-ember-500/10 text-ember-400 flex items-center justify-center group-hover:bg-ember-500/15 transition-colors">
                 <service.icon className="h-6 w-6" />
               </div>
-              <h3 className="mt-5 font-display text-lg font-semibold text-steel-100">
+              <h3 className="mt-5 font-display text-xl font-semibold text-steel-100">
                 {service.title}
               </h3>
-              <p className="mt-2.5 text-sm text-steel-300 leading-relaxed">
+              <p className="mt-2.5 text-base text-steel-300 leading-relaxed">
                 {service.description}
               </p>
             </motion.div>

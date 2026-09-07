@@ -3,10 +3,12 @@ import Logo from "./Logo"
 
 const LINKS = [
   { href: "#servicios", label: "Servicios" },
+  { href: "#planes", label: "Planes" },
   { href: "#proceso", label: "Proceso" },
-  { href: "#stack", label: "Tecnologías" },
-  { href: "#contacto", label: "Contacto" },
 ]
+
+const WHATSAPP_HREF =
+  "https://wa.me/56934142633?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20con%20Everforged%20Software"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -25,12 +27,12 @@ export default function Navbar() {
         scrolled ? "bg-steel-950/85 backdrop-blur-md border-b border-steel-700/60" : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+      <nav className="mx-auto max-w-[1400px] px-6 h-16 flex items-center justify-between">
         <a href="#top" aria-label="Everforged Software - inicio">
           <Logo />
         </a>
 
-        <ul className="hidden md:flex items-center gap-8 text-sm text-steel-300">
+        <ul className="hidden md:flex items-center gap-8 text-base text-steel-300">
           {LINKS.map((link) => (
             <li key={link.href}>
               <a href={link.href} className="hover:text-steel-100 transition-colors">
@@ -41,8 +43,10 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="#contacto"
-          className="hidden md:inline-flex items-center rounded-full bg-ember-500 hover:bg-ember-400 text-steel-950 font-medium text-sm px-4 py-2 transition-colors"
+          href={WHATSAPP_HREF}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:inline-flex items-center rounded-full bg-ember-500 hover:bg-ember-400 text-steel-950 font-medium text-base px-4 py-2 transition-colors"
         >
           Hablemos
         </a>
@@ -82,9 +86,11 @@ export default function Navbar() {
             ))}
           </ul>
           <a
-            href="#contacto"
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="mt-4 inline-flex items-center rounded-full bg-ember-500 text-steel-950 font-medium text-sm px-4 py-2"
+            className="mt-4 inline-flex items-center rounded-full bg-ember-500 text-steel-950 font-medium text-base px-4 py-2"
           >
             Hablemos
           </a>

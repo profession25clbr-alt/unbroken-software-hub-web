@@ -16,7 +16,7 @@ export default function Logo({ className = "" }) {
           </linearGradient>
         </defs>
       </svg>
-      <span className="font-display font-semibold text-lg tracking-tight text-steel-100">
+      <span className="font-display font-semibold text-xl tracking-tight text-steel-100">
         Everforged<span className="text-ember-400">.</span>
       </span>
     </div>

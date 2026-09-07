@@ -27,7 +27,7 @@ const STEPS = [
 export default function Process() {
   return (
     <section id="proceso" className="py-24 md:py-32 border-t border-steel-800">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-[1400px] px-6">
         <SectionHeading
           eyebrow="Cómo trabajo"
           title="Un proceso simple y transparente"
@@ -44,11 +44,11 @@ export default function Process() {
               transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="relative pl-6 md:pl-0 md:pt-6 border-l md:border-l-0 md:border-t border-steel-700"
             >
-              <span className="font-display text-3xl font-semibold text-ember-500/70">
+              <span className="font-display text-4xl font-semibold text-ember-500/70">
                 {step.n}
               </span>
-              <h3 className="mt-3 font-display font-semibold text-steel-100">{step.title}</h3>
-              <p className="mt-2 text-sm text-steel-300 leading-relaxed">{step.description}</p>
+              <h3 className="mt-3 font-display text-lg font-semibold text-steel-100">{step.title}</h3>
+              <p className="mt-2 text-base text-steel-300 leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>

@@ -11,15 +11,15 @@ export default function SectionHeading({ eyebrow, title, description, align = "c
       className={`max-w-2xl ${isCenter ? "mx-auto text-center" : ""} mb-14`}
     >
       {eyebrow && (
-        <span className="text-xs font-medium tracking-widest uppercase text-ember-400">
+        <span className="text-sm font-medium tracking-widest uppercase text-ember-400">
           {eyebrow}
         </span>
       )}
-      <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight text-steel-100">
+      <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold tracking-tight text-steel-100">
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-steel-300 leading-relaxed">{description}</p>
+        <p className="mt-4 text-lg text-steel-300 leading-relaxed">{description}</p>
       )}
     </motion.div>
   )
