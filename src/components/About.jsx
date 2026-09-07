@@ -17,6 +17,10 @@ export default function About() {
               <img
                 src="/images/founder.jpg"
                 alt="Fundador de Everforged Software"
+                width="240"
+                height="240"
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full rounded-full object-cover border-2 border-steel-950"
               />
             </div>
@@ -60,7 +64,7 @@ export default function About() {
           {HIGHLIGHTS.map((item) => (
             <li
               key={item}
-              className="flex items-start gap-3 rounded-xl border border-steel-700 bg-steel-900/50 px-5 py-4 text-base text-steel-200"
+              className="flex items-start gap-3 rounded-xl border border-steel-700 bg-steel-900/50 px-5 py-4 text-base text-steel-200 transition-colors duration-200 hover:border-ember-500/40 hover:bg-steel-900"
             >
               <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-ember-400" />
               {item}

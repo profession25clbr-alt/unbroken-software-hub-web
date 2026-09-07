@@ -40,7 +40,7 @@ export default function Hero() {
           className="font-display text-5xl sm:text-6xl md:text-7xl font-semibold tracking-tight leading-[1.08] text-steel-100"
         >
           Software y sitios web,
-          <br />
+          <br className="hidden sm:inline" />{" "}
           <span className="text-gradient-ember">forjados a tu medida.</span>
         </motion.h1>
 
@@ -67,13 +67,13 @@ export default function Hero() {
             href="https://wa.me/56934142633?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20con%20Everforged%20Software"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-ember-500 hover:bg-ember-400 text-steel-950 font-medium px-6 py-3 transition-colors"
+            className="inline-flex items-center justify-center rounded-full bg-ember-500 px-7 py-3.5 font-medium text-steel-950 shadow-lg shadow-ember-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-xl hover:shadow-ember-500/40"
           >
             Cuéntame tu proyecto
           </a>
           <a
             href="#servicios"
-            className="inline-flex items-center justify-center rounded-full border border-steel-600 hover:border-steel-400 text-steel-100 font-medium px-6 py-3 transition-colors"
+            className="inline-flex items-center justify-center rounded-full border border-steel-600 px-7 py-3.5 font-medium text-steel-100 transition-all duration-200 hover:-translate-y-0.5 hover:border-steel-400 hover:bg-steel-800/50"
           >
             Ver servicios
           </a>

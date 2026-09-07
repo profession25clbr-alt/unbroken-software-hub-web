@@ -191,22 +191,73 @@
 
 html {
   scroll-behavior: smooth;
+  /* El navbar es fijo (h-16): sin esto los enlaces de ancla dejan el título
+     escondido debajo de la barra. */
+  scroll-padding-top: 6rem;
 }
 
 body {
   background-color: var(--color-steel-950);
   color: var(--color-steel-100);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Smooth crossfade when the palette changes */
-* {
-  transition: background-color 0.45s ease, border-color 0.45s ease, color 0.3s ease;
+/* Los temas oscuros/claros le avisan al navegador qué pintar en scrollbars,
+   controles nativos y el fondo del overscroll. */
+:root,
+:root[data-theme="volt"],
+:root[data-theme="toxic"],
+:root[data-theme="royal"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="forge-light"],
+:root[data-theme="volt-light"],
+:root[data-theme="toxic-light"],
+:root[data-theme="royal-light"] {
+  color-scheme: light;
+}
+
+/* Crossfade al cambiar de paleta. Se activa por una clase temporal en <html>
+   en vez de un `* { transition }` permanente: así los hover de las tarjetas
+   siguen siendo rápidos (150ms) en lugar de arrastrarse 450ms. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color 0.45s ease, border-color 0.45s ease,
+    color 0.35s ease, fill 0.45s ease, stroke 0.45s ease !important;
 }
 
 ::selection {
   background-color: var(--color-ember-500);
   color: var(--color-steel-950);
+}
+
+/* Foco visible y consistente para navegación por teclado. */
+:focus-visible {
+  outline: 2px solid var(--color-ember-400);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background-color: var(--color-ember-500);
+  color: var(--color-steel-950);
+  font-weight: 500;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
 }
 
 .text-gradient-ember {
@@ -219,4 +270,21 @@ body {
 .bg-noise {
   background-image: radial-gradient(circle at 1px 1px, var(--color-noise) 1px, transparent 0);
   background-size: 22px 22px;
+}
+
+/* Respeta a quien tiene activado "reducir movimiento" en su sistema:
+   se mantiene todo visible, pero sin animaciones ni scroll animado. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

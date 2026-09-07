@@ -4,17 +4,69 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Everforged Software — Software y páginas web a medida</title>
     <meta
       name="description"
-      content="Everforged Software — desarrollo de software y aplicaciones web personalizadas, forjadas a medida para tu negocio."
+      content="Desarrollo de aplicaciones a medida, páginas web y automatización de procesos para negocios. Cada proyecto parte con un análisis y un plan de trabajo definido."
     />
-    <title>Everforged Software</title>
+    <meta name="author" content="Everforged Software" />
+    <meta name="theme-color" content="#0a0b0d" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content="Everforged Software" />
+    <meta property="og:title" content="Everforged Software — Software y páginas web a medida" />
+    <meta
+      property="og:description"
+      content="Aplicaciones a medida, páginas web y automatización de procesos para negocios que necesitan una solución que calce con su operación."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Everforged Software — Software y páginas web a medida" />
+    <meta
+      name="twitter:description"
+      content="Aplicaciones a medida, páginas web y automatización de procesos para negocios."
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Aplica la paleta guardada antes del primer pintado, para que no se vea
+         el destello del tema oscuro cuando el usuario dejó uno claro. -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("everforged-theme")
+          var valid = [
+            "forge", "forge-light", "volt", "volt-light",
+            "toxic", "toxic-light", "royal", "royal-light",
+          ]
+          if (saved && valid.indexOf(saved) !== -1) {
+            document.documentElement.setAttribute("data-theme", saved)
+          }
+        } catch (e) {}
+      })()
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Everforged Software",
+        "description": "Desarrollo de aplicaciones a medida, páginas web y automatización de procesos para negocios.",
+        "areaServed": "CL",
+        "availableLanguage": "es",
+        "serviceType": [
+          "Desarrollo de software a medida",
+          "Desarrollo de páginas web",
+          "Automatización de procesos"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

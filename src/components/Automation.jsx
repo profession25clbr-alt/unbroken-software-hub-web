@@ -52,9 +52,9 @@ export default function Automation() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group rounded-2xl border border-steel-700 bg-steel-900/50 p-7 hover:border-ember-500/60 hover:bg-steel-900 transition-colors"
+              className="group rounded-2xl border border-steel-700 bg-steel-900/50 p-7 transition-[transform,box-shadow,border-color,background-color] duration-200 hover:-translate-y-1 hover:border-ember-500/60 hover:bg-steel-900 hover:shadow-xl hover:shadow-black/20"
             >
-              <div className="h-11 w-11 rounded-xl bg-ember-500/10 text-ember-400 flex items-center justify-center group-hover:bg-ember-500/15 transition-colors">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-ember-500/10 text-ember-400 transition-all duration-200 group-hover:scale-110 group-hover:bg-ember-500/20">
                 <example.icon className="h-6 w-6" />
               </div>
               <h3 className="mt-5 font-display text-xl font-semibold text-steel-100">

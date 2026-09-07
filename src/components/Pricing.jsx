@@ -43,7 +43,7 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl border border-steel-700 bg-steel-900/50 p-8"
+            className="rounded-2xl border border-steel-700 bg-steel-900/50 p-8 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-ember-500/40 hover:shadow-xl hover:shadow-black/20"
           >
             <div className="h-11 w-11 rounded-xl bg-ember-500/10 text-ember-400 flex items-center justify-center">
               <HiOutlineCpuChip className="h-6 w-6" />
@@ -75,7 +75,7 @@ export default function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-2xl border border-steel-700 bg-steel-900/50 p-8"
+            className="rounded-2xl border border-steel-700 bg-steel-900/50 p-8 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-1 hover:border-ember-500/40 hover:shadow-xl hover:shadow-black/20"
           >
             <div className="h-11 w-11 rounded-xl bg-ember-500/10 text-ember-400 flex items-center justify-center">
               <HiOutlineGlobeAlt className="h-6 w-6" />
@@ -113,7 +113,7 @@ export default function Pricing() {
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-ember-500 hover:bg-ember-400 text-steel-950 font-medium px-6 py-3 transition-colors"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-ember-500 px-7 py-3.5 font-medium text-steel-950 shadow-lg shadow-ember-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-xl hover:shadow-ember-500/40"
           >
             Conversar mi proyecto por WhatsApp
           </a>
