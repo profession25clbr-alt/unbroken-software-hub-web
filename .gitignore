@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Secretos locales del chatbot (API key de Gemini)
+.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

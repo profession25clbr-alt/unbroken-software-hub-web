@@ -10,6 +10,7 @@ import TechStack from "./components/TechStack"
 import Footer from "./components/Footer"
 import FloatingWhatsApp from "./components/FloatingWhatsApp"
 import FloatingEmail from "./components/FloatingEmail"
+import ChatWidget from "./components/ChatWidget"
 import AmbientGlow from "./components/AmbientGlow"
 
 export default function App() {
@@ -35,6 +36,7 @@ export default function App() {
         <Footer />
         <FloatingWhatsApp />
         <FloatingEmail />
+        <ChatWidget />
       </div>
     </MotionConfig>
   )
