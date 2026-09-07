@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { HiOutlineChatBubbleLeftRight, HiOutlineXMark, HiOutlinePaperAirplane } from "react-icons/hi2"
+import { HiOutlineChatBubbleLeftRight, HiOutlineMinus, HiOutlinePaperAirplane } from "react-icons/hi2"
 
 const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_API_URL || "http://localhost:8787/api/chat"
 
@@ -14,6 +14,11 @@ export default function ChatWidget() {
   const [input, setInput] = useState("")
   const [loading, setLoading] = useState(false)
   const scrollRef = useRef(null)
+  const openRef = useRef(open)
+
+  useEffect(() => {
+    openRef.current = open
+  }, [open])
 
   useEffect(() => {
     if (!scrollRef.current) return
@@ -54,6 +59,9 @@ export default function ChatWidget() {
       ])
     } finally {
       setLoading(false)
+      // Si minimizaron el chat mientras esperaba la respuesta, se reabre solo
+      // para que no se pierdan la respuesta.
+      if (!openRef.current) setOpen(true)
     }
   }
 
@@ -61,17 +69,16 @@ export default function ChatWidget() {
     <>
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Cerrar chat" : "Abrir chat"}
+        onClick={() => setOpen(true)}
+        aria-label="Abrir chat"
         aria-expanded={open}
         aria-controls="chat-panel"
-        className="group fixed bottom-24 right-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-ember-500 shadow-lg shadow-black/40 transition-transform duration-200 hover:scale-110 active:scale-95"
+        tabIndex={open ? -1 : 0}
+        className={`fixed bottom-24 right-6 z-40 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-ember-500 shadow-lg shadow-black/40 transition-all duration-200 hover:scale-110 active:scale-95 ${
+          open ? "pointer-events-none scale-0 opacity-0" : "scale-100 opacity-100"
+        }`}
       >
-        {open ? (
-          <HiOutlineXMark className="h-6 w-6 text-steel-950" />
-        ) : (
-          <HiOutlineChatBubbleLeftRight className="h-6 w-6 text-steel-950" />
-        )}
+        <HiOutlineChatBubbleLeftRight className="h-6 w-6 text-steel-950" />
       </button>
 
       <div
@@ -83,9 +90,19 @@ export default function ChatWidget() {
         }`}
         style={{ height: "min(28rem, 70vh)" }}
       >
-        <div className="border-b border-steel-700 px-4 py-3">
-          <p className="font-display text-sm font-semibold text-steel-100">Asistente Everforged</p>
-          <p className="text-xs text-steel-400">Responde según los servicios del sitio</p>
+        <div className="flex items-start justify-between gap-2 border-b border-steel-700 px-4 py-3">
+          <div>
+            <p className="font-display text-sm font-semibold text-steel-100">Asistente Everforged</p>
+            <p className="text-xs text-steel-400">Responde según los servicios del sitio</p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            aria-label="Minimizar chat"
+            className="shrink-0 cursor-pointer rounded-full p-1 text-steel-400 transition-colors hover:bg-steel-800 hover:text-steel-100"
+          >
+            <HiOutlineMinus className="h-5 w-5" />
+          </button>
         </div>
 
         <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
