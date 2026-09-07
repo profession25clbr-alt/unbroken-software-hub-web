@@ -10,7 +10,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const PORT = process.env.PORT || 8787
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "http://localhost:5173"
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite"
+const PRIMARY_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite"
+
+// Cada modelo tiene su propia cuota gratis independiente. Si el principal
+// se queda sin cupo (429) se pasa al siguiente de la lista en vez de fallar.
+// Los Gemma tienen cuota diaria mucho más generosa, por eso van de respaldo.
+const MODEL_CHAIN = [...new Set([PRIMARY_MODEL, "gemma-4-26b-a4b-it", "gemma-4-31b-it"])]
 
 if (!GEMINI_API_KEY) {
   console.error(
@@ -63,31 +68,46 @@ app.post("/api/chat", async (req, res) => {
       temperature: 0.4,
     },
   })
-  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`
-
   try {
-    // El tier gratis de Gemini devuelve 503 "high demand" de vez en cuando,
-    // se recupera solo en un par de segundos: reintentamos antes de fallar.
     let response
-    for (let attempt = 0; attempt < 3; attempt++) {
-      response = await fetch(geminiUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: requestBody,
-      })
-      if (response.ok || response.status !== 503) break
-      await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)))
+    let usedModel
+
+    for (const model of MODEL_CHAIN) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`
+
+      // El tier gratis devuelve 503 "high demand" de vez en cuando, se
+      // recupera solo en un par de segundos: reintentamos antes de rendirnos.
+      for (let attempt = 0; attempt < 3; attempt++) {
+        response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: requestBody,
+        })
+        if (response.ok || response.status !== 503) break
+        await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)))
+      }
+
+      usedModel = model
+      // 429 = se acabó la cuota de ESTE modelo puntual. Como cada modelo
+      // tiene su propia cuota independiente, se prueba el siguiente en vez
+      // de devolver error al visitante.
+      if (response.status !== 429) break
+      console.warn(`Cuota agotada en ${model}, probando siguiente modelo del fallback.`)
     }
 
     if (!response.ok) {
       const detail = await response.text()
-      console.error("Gemini API error:", response.status, detail)
+      console.error(`Gemini API error (${usedModel}):`, response.status, detail)
       return res.status(502).json({ error: "El asistente no está disponible en este momento." })
     }
 
     const data = await response.json()
     const candidate = data.candidates?.[0]
-    const reply = candidate?.content?.parts?.map((p) => p.text).join("") ?? ""
+    const reply =
+      candidate?.content?.parts
+        ?.filter((p) => !p.thought)
+        .map((p) => p.text)
+        .join("") ?? ""
 
     if (candidate?.finishReason === "MAX_TOKENS") {
       console.warn("Respuesta cortada por maxOutputTokens, subir el límite si se repite.")
