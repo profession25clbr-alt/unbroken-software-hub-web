@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "server": "node server/index.js"
+    "server": "node server/index.js",
+    "test:fallback": "node server/test-fallback.mjs"
   },
   "dependencies": {
     "cors": "^2.8.6",

@@ -98,7 +98,7 @@ app.post("/api/chat", async (req, res) => {
     if (!response.ok) {
       const detail = await response.text()
       console.error(`Gemini API error (${usedModel}):`, response.status, detail)
-      return res.status(502).json({ error: "El asistente no está disponible en este momento." })
+      return res.status(502).json({ error: "El asistente no está disponible en este momento.", model: usedModel })
     }
 
     const data = await response.json()
@@ -114,10 +114,12 @@ app.post("/api/chat", async (req, res) => {
     }
 
     if (!reply) {
-      return res.status(502).json({ error: "El asistente no pudo generar una respuesta." })
+      return res.status(502).json({ error: "El asistente no pudo generar una respuesta.", model: usedModel })
     }
 
-    res.json({ reply })
+    // "model" queda expuesto solo para depuración/pruebas (ver test-fallback.mjs);
+    // el ChatWidget lo ignora, solo lee "reply".
+    res.json({ reply, model: usedModel })
   } catch (err) {
     console.error("Error llamando a Gemini:", err)
     res.status(502).json({ error: "El asistente no está disponible en este momento." })
