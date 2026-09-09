@@ -63,7 +63,6 @@ export default function ThemeSwitcher() {
         type="button"
         onClick={cycleTheme}
         aria-label={`Cambiar paleta de colores (actual: ${current.label})`}
-        title="Cambiar paleta de colores"
         className="group relative flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full"
       >
         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ember-400 opacity-40 motion-reduce:hidden" />
@@ -72,16 +71,7 @@ export default function ThemeSwitcher() {
         </span>
       </button>
 
-      {/* Confirma qué paleta quedó activa: sin esto el cambio es a ciegas. */}
-      <span
-        aria-hidden="true"
-        className={`pointer-events-none absolute left-0 top-full mt-2 whitespace-nowrap rounded-full border border-ember-500/40 bg-steel-900/90 px-3 py-1 text-xs font-medium text-ember-300 backdrop-blur-sm transition-all duration-200 ${
-          showLabel ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
-        }`}
-      >
-        {current.label}
-      </span>
-
+      {/* Confirma a lectores de pantalla qué paleta quedó activa, sin mostrar nada en pantalla. */}
       <span aria-live="polite" className="sr-only">
         {showLabel ? `Paleta ${current.label} aplicada` : ""}
       </span>

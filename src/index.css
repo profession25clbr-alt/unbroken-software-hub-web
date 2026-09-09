@@ -272,6 +272,18 @@ body {
   background-size: 22px 22px;
 }
 
+/* Cinta de tecnologías (TechStack): dos copias del mismo texto una al lado
+   de la otra, desplazadas -50% (= el ancho de una copia) para que el loop
+   se vea continuo, de derecha a izquierda. */
+@keyframes tech-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 /* Respeta a quien tiene activado "reducir movimiento" en su sistema:
    se mantiene todo visible, pero sin animaciones ni scroll animado. */
 @media (prefers-reduced-motion: reduce) {
