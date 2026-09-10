@@ -12,13 +12,13 @@ export default function AmbientGlow() {
       {BLOBS.map((blob, i) => (
         <div
           key={i}
-          className="absolute rounded-full blur-[110px]"
+          className="glow-blob absolute rounded-full blur-[110px]"
           style={{
             top: blob.top,
             left: blob.left,
             height: blob.size,
             width: blob.size,
-            opacity: blob.opacity,
+            "--glow-base-opacity": blob.opacity,
             transform: "translate(-50%, -50%)",
             background: "radial-gradient(circle, var(--color-glow) 0%, transparent 70%)",
           }}

@@ -26,6 +26,11 @@
 
   --color-glow: #ff4d1f;
   --color-noise: rgba(255, 255, 255, 0.035);
+
+  /* Multiplicador del brillo ambiental (AmbientGlow/Hero): sobre fondo casi
+     negro el glow satura fuerte con poca opacidad; sobre fondo casi blanco
+     el mismo color se ve lavado, por eso los temas claros lo suben. */
+  --glow-strength: 1;
 }
 
 /* Alternate palettes — swapped at runtime via data-theme on <html>.
@@ -112,6 +117,7 @@
 
   --color-glow: #c2410c;
   --color-noise: rgba(30, 22, 10, 0.05);
+  --glow-strength: 2.2;
 }
 
 :root[data-theme="volt-light"] {
@@ -137,6 +143,7 @@
 
   --color-glow: #0f6fc7;
   --color-noise: rgba(10, 25, 45, 0.045);
+  --glow-strength: 2.2;
 }
 
 :root[data-theme="toxic-light"] {
@@ -162,6 +169,7 @@
 
   --color-glow: #22913f;
   --color-noise: rgba(15, 35, 15, 0.045);
+  --glow-strength: 2.2;
 }
 
 :root[data-theme="royal-light"] {
@@ -187,6 +195,7 @@
 
   --color-glow: #8a2fd1;
   --color-noise: rgba(30, 10, 40, 0.045);
+  --glow-strength: 2.2;
 }
 
 html {
@@ -258,6 +267,14 @@ body {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+/* AmbientGlow/Hero: la opacidad final combina un valor base por blob con
+   --glow-strength del tema activo, y transiciona sola cuando --glow-strength
+   cambia al cambiar de paleta (efecto de luz apagándose/encendiéndose). */
+.glow-blob {
+  opacity: calc(var(--glow-strength, 1) * var(--glow-base-opacity, 1));
+  transition: opacity 0.6s ease;
 }
 
 .text-gradient-ember {

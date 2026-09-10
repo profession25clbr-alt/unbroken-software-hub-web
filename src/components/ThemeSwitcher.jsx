@@ -71,7 +71,16 @@ export default function ThemeSwitcher() {
         </span>
       </button>
 
-      {/* Confirma a lectores de pantalla qué paleta quedó activa, sin mostrar nada en pantalla. */}
+      {/* Confirma qué paleta quedó activa: sin esto el cambio es a ciegas. */}
+      <span
+        aria-hidden="true"
+        className={`pointer-events-none absolute left-0 top-full mt-2 whitespace-nowrap rounded-full border border-ember-500/40 bg-steel-900/90 px-3 py-1 text-xs font-medium text-ember-300 backdrop-blur-sm transition-all duration-200 ${
+          showLabel ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
+        }`}
+      >
+        {current.label}
+      </span>
+
       <span aria-live="polite" className="sr-only">
         {showLabel ? `Paleta ${current.label} aplicada` : ""}
       </span>
