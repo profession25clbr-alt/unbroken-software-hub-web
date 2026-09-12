@@ -27,7 +27,7 @@ if (!GEMINI_API_KEY) {
 
 const companyContext = readFileSync(join(__dirname, "context", "company.md"), "utf-8")
 
-const SYSTEM_INSTRUCTION = `Eres el asistente virtual del sitio web de Everforged Software.
+const SYSTEM_INSTRUCTION = `Eres el asistente virtual del sitio web de Unbroken Software Hub.
 Tu única fuente de información es el siguiente documento. No tienes acceso a
 ningún otro sistema, archivo, computador o dato fuera de este texto.
 

@@ -6,10 +6,10 @@ const WHATSAPP_NUMBER = "56934142633"
 const CONTACT_EMAIL = "profession25cl.br@gmail.com"
 
 const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hola, quiero conversar sobre un proyecto con Everforged Software"
+  "Hola, quiero conversar sobre un proyecto con Unbroken Software Hub"
 )}`
 const GMAIL_HREF = `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}&su=${encodeURIComponent(
-  "Proyecto con Everforged Software"
+  "Proyecto con Unbroken Software Hub"
 )}`
 
 const LINKS = [
@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-12 border-t border-steel-800 pt-6 text-sm text-steel-500">
-          © {new Date().getFullYear()} Everforged Software. Todos los derechos reservados.
+          © {new Date().getFullYear()} Unbroken Software Hub. Todos los derechos reservados.
         </p>
       </div>
     </footer>

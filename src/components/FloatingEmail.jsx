@@ -3,7 +3,7 @@ import { HiOutlineEnvelope } from "react-icons/hi2"
 const CONTACT_EMAIL = "profession25cl.br@gmail.com"
 
 const GMAIL_COMPOSE_URL = `https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_EMAIL}&su=${encodeURIComponent(
-  "Proyecto con Everforged Software"
+  "Proyecto con Unbroken Software Hub"
 )}`
 
 export default function FloatingEmail() {

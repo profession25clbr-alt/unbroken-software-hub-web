@@ -4,7 +4,7 @@ const WHATSAPP_NUMBER = "56934142633"
 
 export default function FloatingWhatsApp() {
   const message = encodeURIComponent(
-    "Hola, quiero conversar sobre un proyecto con Everforged Software"
+    "Hola, quiero conversar sobre un proyecto con Unbroken Software Hub"
   )
 
   // Botón en vez de <a href>: evita que el navegador muestre la URL de

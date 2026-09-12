@@ -17,7 +17,7 @@ export default function Logo({ className = "" }) {
         </defs>
       </svg>
       <span className="font-display font-semibold text-xl tracking-tight text-steel-100">
-        Everforged<span className="text-ember-400">.</span>
+        Unbroken Software Hub<span className="text-ember-400">.</span>
       </span>
     </div>
   )

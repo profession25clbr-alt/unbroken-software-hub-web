@@ -68,7 +68,7 @@ export default function Navbar() {
       >
         <div className="flex items-center gap-3">
           <ThemeSwitcher />
-          <a href="#top" aria-label="Everforged Software - inicio" className="rounded-lg">
+          <a href="#top" aria-label="Unbroken Software Hub - inicio" className="rounded-lg">
             <Logo />
           </a>
         </div>
