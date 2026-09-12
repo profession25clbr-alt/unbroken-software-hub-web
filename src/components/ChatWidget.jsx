@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from "react"
 import { HiOutlineChatBubbleLeftRight, HiOutlineMinus, HiOutlinePaperAirplane } from "react-icons/hi2"
 
 const CHAT_ENDPOINT = import.meta.env.VITE_CHAT_API_URL || "http://localhost:8787/api/chat"
+const AUTO_OPEN_DELAY = 25000
 
 const WELCOME = {
   role: "model",
-  text: "¡Hola! Soy el asistente de Everforged Software. Pregúntame sobre servicios, automatización, forma de trabajo o cómo contactar.",
+  text: "¡Hola! Soy el asistente de Unbroken Software Hub. Pregúntame sobre servicios, automatización, forma de trabajo o cómo contactar.",
 }
 
 export default function ChatWidget() {
@@ -15,10 +16,23 @@ export default function ChatWidget() {
   const [loading, setLoading] = useState(false)
   const scrollRef = useRef(null)
   const openRef = useRef(open)
+  const hasInteractedRef = useRef(false)
 
   useEffect(() => {
     openRef.current = open
   }, [open])
+
+  // Si a los 25s de llegar a la página nadie tocó el ícono del chat, se abre
+  // solo para invitar a preguntar. No se activa si el usuario ya interactuó.
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!hasInteractedRef.current) {
+        hasInteractedRef.current = true
+        setOpen(true)
+      }
+    }, AUTO_OPEN_DELAY)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     if (!scrollRef.current) return
@@ -69,7 +83,10 @@ export default function ChatWidget() {
     <>
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          hasInteractedRef.current = true
+          setOpen(true)
+        }}
         aria-label="Abrir chat"
         aria-expanded={open}
         aria-controls="chat-panel"
@@ -84,7 +101,7 @@ export default function ChatWidget() {
       <div
         id="chat-panel"
         role="dialog"
-        aria-label="Chat con el asistente de Everforged Software"
+        aria-label="Chat con el asistente de Unbroken Software Hub"
         className={`fixed bottom-[6.5rem] right-6 z-50 flex w-[calc(100vw-3rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-steel-700 bg-steel-900/95 shadow-2xl shadow-black/50 backdrop-blur-md transition-all duration-200 ${
           open ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
         }`}
@@ -92,7 +109,7 @@ export default function ChatWidget() {
       >
         <div className="flex items-start justify-between gap-2 border-b border-steel-700 px-4 py-3">
           <div>
-            <p className="font-display text-sm font-semibold text-steel-100">Asistente Everforged</p>
+            <p className="font-display text-sm font-semibold text-steel-100">Asistente Unbroken Software Hub</p>
             <p className="text-xs text-steel-400">Responde según los servicios del sitio</p>
           </div>
           <button
