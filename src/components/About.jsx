@@ -16,7 +16,7 @@ export default function About() {
             <div className="h-24 w-24 shrink-0 rounded-full p-[2px] bg-gradient-to-br from-ember-400 to-gold-400">
               <img
                 src="/images/founder.jpg"
-                alt="Fundador de Everforged Software"
+                alt="Fundador de Unbroken Software Hub"
                 width="240"
                 height="240"
                 loading="lazy"
@@ -25,10 +25,7 @@ export default function About() {
               />
             </div>
             <div>
-              <span className="text-sm font-medium tracking-widest uppercase text-ember-400 block">
-                Sobre Everforged
-              </span>
-              <p className="mt-1.5 text-base text-steel-300">Fundador de Everforged Software</p>
+              <p className="text-base text-steel-300">Fundador de Unbroken Software Hub</p>
             </div>
           </div>
 
@@ -42,13 +39,13 @@ export default function About() {
               Un desarrollador, no una fábrica de plantillas
             </h2>
             <p className="mt-5 text-lg text-steel-300 leading-relaxed">
-              Everforged Software construye herramientas y sitios web para negocios que
+              Unbroken Software Hub construye herramientas y sitios web para negocios que
               necesitan algo específico: un proceso que hoy se hace a mano, un sistema que
               ya no da abasto, o simplemente una presencia web que refleje bien lo que hacen.
             </p>
             <p className="mt-4 text-lg text-steel-300 leading-relaxed">
               Si tienes una idea clara de lo que necesitas, la conversamos y evaluamos en
-              conjunto cómo construirla de forma realista — con plazos y alcance definidos
+              conjunto cómo construirla de forma realista, con plazos y alcance definidos
               desde el principio.
             </p>
           </motion.div>

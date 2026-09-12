@@ -25,14 +25,13 @@ const WEB_ITEMS = [
 
 export default function Pricing() {
   const waMessage = encodeURIComponent(
-    "Hola, quiero que analicemos mi proyecto para armar un plan de trabajo con Everforged Software"
+    "Hola, quiero que analicemos mi proyecto para armar un plan de trabajo con Unbroken Software Hub"
   )
 
   return (
     <section id="planes" className="py-24 md:py-32 border-t border-steel-800">
       <div className="mx-auto max-w-[1400px] px-6">
         <SectionHeading
-          eyebrow="Forma de trabajo y pago"
           title="El plan se arma según lo que tu proyecto necesita"
           description="No trabajo con tarifas fijas de catálogo: cada proyecto parte con un análisis de lo que realmente se necesita, y desde ahí se define un plan de trabajo y de pago acorde."
         />
@@ -113,7 +112,7 @@ export default function Pricing() {
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-ember-500 px-7 py-3.5 font-medium text-steel-950 shadow-lg shadow-ember-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-xl hover:shadow-ember-500/40"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-ember-500 px-7 py-3.5 font-medium text-steel-950 shadow-lg shadow-ember-500/25 transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-xl hover:shadow-ember-500/40 active:translate-y-0 active:scale-[0.97]"
           >
             Conversar mi proyecto por WhatsApp
           </a>

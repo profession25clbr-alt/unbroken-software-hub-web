@@ -34,7 +34,6 @@ export default function Services() {
     <section id="servicios" className="py-24 md:py-32 border-t border-steel-800">
       <div className="mx-auto max-w-[1400px] px-6">
         <SectionHeading
-          eyebrow="Servicios"
           title="Lo que puedo construir para ti"
           description="Cada proyecto parte entendiendo el problema real del negocio, antes de escribir una sola línea de código."
         />

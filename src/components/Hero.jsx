@@ -54,9 +54,8 @@ export default function Hero() {
           variants={fadeUp}
           className="mt-6 text-xl text-steel-300 max-w-2xl mx-auto leading-relaxed"
         >
-          Everforged Software diseña y desarrolla aplicaciones personalizadas y páginas
-          web para negocios que necesitan una solución que calce exactamente con su
-          operación — sin plantillas genéricas, sin funcionalidades de más.
+          Unbroken Software Hub diseña software y páginas web a medida, sin plantillas
+          genéricas ni funciones de más.
         </motion.p>
 
         <motion.div
@@ -67,16 +66,16 @@ export default function Hero() {
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <a
-            href="https://wa.me/56934142633?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20con%20Everforged%20Software"
+            href="https://wa.me/56934142633?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20con%20Unbroken%20Software%20Hub"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full bg-ember-500 px-7 py-3.5 font-medium text-steel-950 shadow-lg shadow-ember-500/25 transition-all duration-200 hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-xl hover:shadow-ember-500/40"
+            className="inline-flex items-center justify-center rounded-full bg-ember-500 px-7 py-3.5 font-medium text-steel-950 shadow-lg shadow-ember-500/25 transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-ember-400 hover:shadow-xl hover:shadow-ember-500/40 active:translate-y-0 active:scale-[0.97]"
           >
             Cuéntame tu proyecto
           </a>
           <a
             href="#servicios"
-            className="inline-flex items-center justify-center rounded-full border border-steel-600 px-7 py-3.5 font-medium text-steel-100 transition-all duration-200 hover:-translate-y-0.5 hover:border-steel-400 hover:bg-steel-800/50"
+            className="inline-flex items-center justify-center rounded-full border border-steel-600 px-7 py-3.5 font-medium text-steel-100 transition-[transform,border-color,background-color] duration-200 hover:-translate-y-0.5 hover:border-steel-400 hover:bg-steel-800/50 active:translate-y-0 active:scale-[0.97]"
           >
             Ver servicios
           </a>

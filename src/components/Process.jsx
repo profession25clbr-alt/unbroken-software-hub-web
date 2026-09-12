@@ -29,9 +29,8 @@ export default function Process() {
     <section id="proceso" className="py-24 md:py-32 border-t border-steel-800">
       <div className="mx-auto max-w-[1400px] px-6">
         <SectionHeading
-          eyebrow="Cómo trabajo"
           title="Un proceso simple y transparente"
-          description="Sin procesos inflados ni burocracia — el foco está en avanzar y mantenerte informado."
+          description="Sin procesos inflados ni burocracia. El foco está en avanzar y mantenerte informado."
         />
 
         <div className="grid md:grid-cols-4 gap-6 md:gap-4">
