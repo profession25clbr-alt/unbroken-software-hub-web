@@ -151,8 +151,8 @@ export default function ChatWidget() {
         </div>
 
         <p className="border-t border-steel-700 px-4 pt-2 text-[11px] leading-snug text-steel-500">
-          Tus mensajes se procesan con IA de Google (Gemini) para responderte. No compartas datos personales,
-          contraseñas ni información sensible.
+          Tus mensajes se procesan con IA para responderte. No compartas datos personales, contraseñas ni
+          información sensible.
         </p>
 
         <form onSubmit={sendMessage} className="flex items-center gap-2 p-3">
