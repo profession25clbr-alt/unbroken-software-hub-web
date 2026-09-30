@@ -59,6 +59,14 @@ export default function ChatWidget() {
         }),
       })
 
+      if (response.status === 429) {
+        setMessages((prev) => [
+          ...prev,
+          { role: "model", text: "Estás escribiendo muy rápido. Espera unos segundos y vuelve a intentarlo." },
+        ])
+        return
+      }
+
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || "Error desconocido")
 
@@ -142,7 +150,12 @@ export default function ChatWidget() {
           )}
         </div>
 
-        <form onSubmit={sendMessage} className="flex items-center gap-2 border-t border-steel-700 p-3">
+        <p className="border-t border-steel-700 px-4 pt-2 text-[11px] leading-snug text-steel-500">
+          Tus mensajes se procesan con IA de Google (Gemini) para responderte. No compartas datos personales,
+          contraseñas ni información sensible.
+        </p>
+
+        <form onSubmit={sendMessage} className="flex items-center gap-2 p-3">
           <input
             type="text"
             value={input}

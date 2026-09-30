@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.github
+.idea
+.env
+.env.*
+docs
+*.md
+server/test-fallback.log
+server/test-fallback.mjs
+Dockerfile
+docker-compose.yml
+.dockerignore

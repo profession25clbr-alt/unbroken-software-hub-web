@@ -1,27 +1,37 @@
 import "dotenv/config"
 import express from "express"
 import cors from "cors"
-import { readFileSync } from "node:fs"
+import rateLimit from "express-rate-limit"
+import { existsSync, readFileSync } from "node:fs"
 import { fileURLToPath } from "node:url"
 import { dirname, join } from "node:path"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const DIST_DIR = join(__dirname, "..", "dist")
 
 const PORT = process.env.PORT || 8787
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || "http://localhost:5173"
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY
-const PRIMARY_MODEL = process.env.GEMINI_MODEL || "gemini-3.5-flash-lite"
 
-// Cada modelo tiene su propia cuota gratis independiente. Si el principal
-// se queda sin cupo (429) se pasa al siguiente de la lista en vez de fallar.
-// Los Gemma tienen cuota diaria mucho más generosa, por eso van de respaldo.
-const MODEL_CHAIN = [...new Set([PRIMARY_MODEL, "gemma-4-26b-a4b-it", "gemma-4-31b-it"])]
+// Cadena de modelos por prioridad. Cada modelo tiene su propia cuota gratis
+// independiente: si el primero se queda sin cupo (429) se pasa al siguiente en
+// vez de fallar. Los Gemma tienen cuota mucho más generosa, por eso van de respaldo.
+// GEMINI_MODELS = lista separada por comas (así se cambia el orden sin tocar
+// código). Si solo existe el GEMINI_MODEL viejo, se arma la cadena de antes.
+const DEFAULT_FALLBACKS = ["gemma-4-26b-a4b-it", "gemma-4-31b-it"]
+const MODEL_CHAIN = process.env.GEMINI_MODELS
+  ? [...new Set(process.env.GEMINI_MODELS.split(",").map((m) => m.trim()).filter(Boolean))]
+  : [...new Set([process.env.GEMINI_MODEL || "gemini-3.5-flash-lite", ...DEFAULT_FALLBACKS])]
 
 if (!GEMINI_API_KEY) {
   console.error(
     "Falta GEMINI_API_KEY. Crea un archivo .env en la raíz del proyecto " +
       "(puedes copiar .env.example) con tu clave de Google AI Studio."
   )
+  process.exit(1)
+}
+if (MODEL_CHAIN.length === 0) {
+  console.error("GEMINI_MODELS no contiene ningún modelo.")
   process.exit(1)
 }
 
@@ -38,11 +48,57 @@ ${companyContext}
 const MAX_MESSAGE_LENGTH = 800
 const MAX_HISTORY_TURNS = 8
 
+// Límite por IP: Flash Lite permite 15 por minuto en total para TODOS los
+// visitantes, así que se deja 10 por IP para no agotarlo con una sola persona.
+const RATE_LIMIT_PER_MINUTE = Number(process.env.CHAT_RATE_LIMIT || 10)
+
+// Tiempo mínimo de una respuesta. Si Gemini contesta antes, se espera el resto;
+// si tarda más (conexión lenta), no se agrega ningún retraso extra.
+const MIN_RESPONSE_MS = Number(process.env.CHAT_MIN_RESPONSE_MS || 2000)
+
+// Un modelo que devolvió 429 se salta durante este tiempo, sin gastar otra
+// petición para enterarse de lo mismo.
+const COOLDOWN_MS = 60_000
+const cooldownUntil = new Map()
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
 const app = express()
+// Detrás de nginx la IP real viene en X-Forwarded-For; sin esto el rate limit
+// vería siempre 127.0.0.1 y todos los visitantes compartirían un solo cupo.
+app.set("trust proxy", Number(process.env.TRUST_PROXY || 0))
 app.use(cors({ origin: ALLOWED_ORIGIN }))
 app.use(express.json({ limit: "20kb" }))
 
-app.post("/api/chat", async (req, res) => {
+app.get("/healthz", (_req, res) => res.type("text/plain").send("ok"))
+
+const chatLimiter = rateLimit({
+  windowMs: 60_000,
+  limit: RATE_LIMIT_PER_MINUTE,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Demasiadas preguntas seguidas. Espera un momento." },
+})
+
+async function llamarGemini(model, requestBody) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`
+  let response
+
+  // El tier gratis devuelve 503 "high demand" de vez en cuando, se recupera
+  // solo en un par de segundos: reintentamos antes de rendirnos.
+  for (let attempt = 0; attempt < 3; attempt++) {
+    response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": GEMINI_API_KEY },
+      body: requestBody,
+    })
+    if (response.ok || response.status !== 503) break
+    await sleep(1000 * (attempt + 1))
+  }
+  return response
+}
+
+app.post("/api/chat", chatLimiter, async (req, res) => {
   const { message, history } = req.body ?? {}
 
   if (typeof message !== "string" || !message.trim()) {
@@ -50,6 +106,13 @@ app.post("/api/chat", async (req, res) => {
   }
   if (message.length > MAX_MESSAGE_LENGTH) {
     return res.status(400).json({ error: "Mensaje demasiado largo." })
+  }
+
+  const started = Date.now()
+  const responder = async (status, body) => {
+    const restante = MIN_RESPONSE_MS - (Date.now() - started)
+    if (restante > 0) await sleep(restante)
+    return res.status(status).json(body)
   }
 
   const safeHistory = Array.isArray(history)
@@ -68,37 +131,32 @@ app.post("/api/chat", async (req, res) => {
       temperature: 0.4,
     },
   })
+
   try {
+    // Se saltan los modelos en enfriamiento; si TODOS lo están se intenta la
+    // cadena completa igual, porque el cupo pudo haberse liberado antes de tiempo.
+    const ahora = Date.now()
+    const disponibles = MODEL_CHAIN.filter((m) => (cooldownUntil.get(m) ?? 0) <= ahora)
+    const candidatos = disponibles.length > 0 ? disponibles : MODEL_CHAIN
+
     let response
     let usedModel
 
-    for (const model of MODEL_CHAIN) {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`
-
-      // El tier gratis devuelve 503 "high demand" de vez en cuando, se
-      // recupera solo en un par de segundos: reintentamos antes de rendirnos.
-      for (let attempt = 0; attempt < 3; attempt++) {
-        response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: requestBody,
-        })
-        if (response.ok || response.status !== 503) break
-        await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)))
-      }
-
+    for (const model of candidatos) {
+      response = await llamarGemini(model, requestBody)
       usedModel = model
-      // 429 = se acabó la cuota de ESTE modelo puntual. Como cada modelo
-      // tiene su propia cuota independiente, se prueba el siguiente en vez
-      // de devolver error al visitante.
+
+      // 429 = se acabó la cuota de ESTE modelo puntual: se prueba el siguiente
+      // en vez de devolver error al visitante.
       if (response.status !== 429) break
-      console.warn(`Cuota agotada en ${model}, probando siguiente modelo del fallback.`)
+      cooldownUntil.set(model, Date.now() + COOLDOWN_MS)
+      console.warn(`Cuota agotada en ${model}, en enfriamiento ${COOLDOWN_MS / 1000}s. Probando siguiente modelo.`)
     }
 
     if (!response.ok) {
       const detail = await response.text()
       console.error(`Gemini API error (${usedModel}):`, response.status, detail)
-      return res.status(502).json({ error: "El asistente no está disponible en este momento.", model: usedModel })
+      return responder(502, { error: "El asistente no está disponible en este momento.", model: usedModel })
     }
 
     const data = await response.json()
@@ -114,18 +172,43 @@ app.post("/api/chat", async (req, res) => {
     }
 
     if (!reply) {
-      return res.status(502).json({ error: "El asistente no pudo generar una respuesta.", model: usedModel })
+      return responder(502, { error: "El asistente no pudo generar una respuesta.", model: usedModel })
     }
 
     // "model" queda expuesto solo para depuración/pruebas (ver test-fallback.mjs);
     // el ChatWidget lo ignora, solo lee "reply".
-    res.json({ reply, model: usedModel })
+    return responder(200, { reply, model: usedModel })
   } catch (err) {
     console.error("Error llamando a Gemini:", err)
-    res.status(502).json({ error: "El asistente no está disponible en este momento." })
+    return responder(502, { error: "El asistente no está disponible en este momento." })
   }
 })
 
+// En producción el mismo proceso sirve la landing compilada (mismo origen que el
+// chat, sin CORS). En desarrollo no existe dist/ y esto no se monta: ahí corre Vite.
+if (existsSync(DIST_DIR)) {
+  app.use(
+    express.static(DIST_DIR, {
+      setHeaders(res, filePath) {
+        // Los archivos de /assets llevan hash en el nombre: se pueden cachear sin miedo.
+        // El index.html no, para que un deploy nuevo se vea de inmediato.
+        res.setHeader(
+          "Cache-Control",
+          filePath.includes(`${join(DIST_DIR, "assets")}`) ? "public, max-age=31536000, immutable" : "no-cache"
+        )
+      },
+    })
+  )
+  app.use((req, res, next) => {
+    if (req.method !== "GET" || req.path.startsWith("/api/")) return next()
+    res.setHeader("Cache-Control", "no-cache")
+    res.sendFile(join(DIST_DIR, "index.html"))
+  })
+}
+
 app.listen(PORT, () => {
-  console.log(`Chat server escuchando en http://localhost:${PORT} (origen permitido: ${ALLOWED_ORIGIN})`)
+  console.log(
+    `Servidor escuchando en el puerto ${PORT} (modelos: ${MODEL_CHAIN.join(" > ")}; ` +
+      `límite ${RATE_LIMIT_PER_MINUTE}/min por IP; sirviendo dist: ${existsSync(DIST_DIR)})`
+  )
 })

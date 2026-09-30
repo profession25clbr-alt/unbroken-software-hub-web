@@ -1,0 +1,20 @@
+# Se copia al servidor (/opt/sites/unbroken-web) en cada deploy junto con un .env
+# que escribe el pipeline. TAG y DOCKER_USERNAME salen de ese .env.
+services:
+  unbroken-web:
+    image: ${DOCKER_USERNAME}/multiuso-unbroken:unbroken-web-${TAG}
+    container_name: unbroken-web
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PORT: "8787"
+      TRUST_PROXY: "1"
+    # Solo loopback: lo publica nginx, nunca se expone directo a internet.
+    ports:
+      - "127.0.0.1:8101:8787"
+    mem_limit: 256m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

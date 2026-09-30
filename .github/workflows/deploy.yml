@@ -1,0 +1,123 @@
+# =============================================================================
+# Deploy de la landing Unbroken Software Hub al Lightsail multiuso.
+# Un push de tag `UW*.*.*` construye la imagen, la sube a Docker Hub y la
+# despliega en el servidor. Infra: ver lightsail-multuso-unbroken/SERVIDOR.md.
+# =============================================================================
+
+name: Unbroken Web Deploy
+
+on:
+  push:
+    tags:
+      - 'UW*.*.*'
+
+# Nunca dos deploys a la vez sobre el mismo servidor.
+concurrency:
+  group: deploy-unbroken-web
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  IMAGE_REPO: multiuso-unbroken
+  IMAGE_PREFIX: unbroken-web
+  SITE_DIR: /opt/sites/unbroken-web
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version tag
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # El build de Vite ocurre dentro del Dockerfile: si la landing no compila,
+      # el deploy se corta acá, antes de tocar el servidor.
+      - name: Build & Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_REPO }}:${{ env.IMAGE_PREFIX }}-${{ steps.vars.outputs.tag }}
+
+      - name: Setup SSH key
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          SSH_HOST: ${{ secrets.LIGHTSAIL_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keygen -l -f ~/.ssh/deploy_key
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      # Los secretos entran por variables de entorno (no interpolados en el texto
+      # del script) y el .env se escribe con printf, sin heredoc.
+      - name: Write runtime .env
+        env:
+          TAG: ${{ steps.vars.outputs.tag }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODELS: ${{ secrets.GEMINI_MODELS }}
+          ALLOWED_ORIGIN: ${{ secrets.ALLOWED_ORIGIN }}
+        run: |
+          umask 077
+          printf '%s\n' \
+            "TAG=$TAG" \
+            "DOCKER_USERNAME=$DOCKER_USERNAME" \
+            "GEMINI_API_KEY=$GEMINI_API_KEY" \
+            "GEMINI_MODELS=$GEMINI_MODELS" \
+            "ALLOWED_ORIGIN=$ALLOWED_ORIGIN" \
+            > deploy.env
+
+      - name: Deploy to AWS Lightsail
+        env:
+          REMOTE: ${{ secrets.LIGHTSAIL_USER }}@${{ secrets.LIGHTSAIL_HOST }}
+        run: |
+          SSH="ssh -i $HOME/.ssh/deploy_key"
+          SCP="scp -i $HOME/.ssh/deploy_key"
+
+          $SSH "$REMOTE" "mkdir -p $SITE_DIR"
+          $SCP deploy.env "$REMOTE:$SITE_DIR/.env"
+          $SCP docker-compose.yml "$REMOTE:$SITE_DIR/docker-compose.yml"
+
+          $SSH "$REMOTE" "SITE_DIR=$SITE_DIR bash -s" << 'EOF'
+            set -e
+            cd "$SITE_DIR"
+            chmod 600 .env
+
+            docker compose pull
+            docker compose up -d --remove-orphans
+
+            # Se conservan por unos días las imágenes anteriores para poder
+            # volver atrás; las huérfanas y las muy viejas se limpian.
+            docker image prune -f
+            docker image prune -af --filter "until=168h"
+
+            # Esperar a que el contenedor responda antes de dar el deploy por bueno.
+            for i in $(seq 1 20); do
+              if curl -fsS http://127.0.0.1:8101/healthz >/dev/null; then
+                echo "healthcheck OK"
+                docker compose ps
+                exit 0
+              fi
+              sleep 2
+            done
+            echo "El contenedor no respondió /healthz"
+            docker compose logs --tail=50
+            exit 1
+          EOF
+
+          rm -f deploy.env
+          echo "✅ Deploy completado — Unbroken Web ${{ steps.vars.outputs.tag }}"
