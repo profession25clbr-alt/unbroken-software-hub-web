@@ -5,6 +5,7 @@ import Services from "./components/Services"
 import Automation from "./components/Automation"
 import Pricing from "./components/Pricing"
 import Process from "./components/Process"
+import Faq from "./components/Faq"
 import About from "./components/About"
 import TechStack from "./components/TechStack"
 import Footer from "./components/Footer"
@@ -30,6 +31,7 @@ export default function App() {
           <Automation />
           <Pricing />
           <Process />
+          <Faq />
           <About />
           <TechStack />
         </main>

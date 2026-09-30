@@ -54,8 +54,8 @@ export default function Hero() {
           variants={fadeUp}
           className="mt-6 text-xl text-steel-300 max-w-2xl mx-auto leading-relaxed"
         >
-          Unbroken Software Hub diseña software y páginas web a medida, sin plantillas
-          genéricas ni funciones de más.
+          Unbroken Software Hub es un servicio de desarrollo de software y páginas web a
+          medida en Chile, sin plantillas genéricas ni funciones de más.
         </motion.p>
 
         <motion.div

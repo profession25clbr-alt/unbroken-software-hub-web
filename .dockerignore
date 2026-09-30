@@ -16,3 +16,4 @@ docker-compose.yml
 .dockerignore
 server/test-gemma.log
 server/test-gemma.mjs
+dist-ssr
