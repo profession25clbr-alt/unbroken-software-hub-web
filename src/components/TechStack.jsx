@@ -5,6 +5,7 @@ const STACK = [
   "PostgreSQL",
   "AWS",
   "Python",
+  "FastAPI",
   "Gemini API",
   "MySQL",
   "MongoDB",

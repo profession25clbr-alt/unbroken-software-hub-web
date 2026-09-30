@@ -130,7 +130,7 @@ export default function ChatWidget() {
           </button>
         </div>
 
-        <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+        <div ref={scrollRef} className="custom-scrollbar flex-1 space-y-3 overflow-y-auto px-4 py-4">
           {messages.map((m, i) => (
             <div
               key={i}

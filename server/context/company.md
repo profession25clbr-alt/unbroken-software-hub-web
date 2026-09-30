@@ -73,7 +73,7 @@ lanzamiento.
 
 ## Tecnologías
 
-React, Node.js, Java / Spring Boot, PostgreSQL, AWS — la tecnología se elige
+React, Node.js, Java / Spring Boot, Python (FastAPI), PostgreSQL, AWS — la tecnología se elige
 según lo que necesita cada proyecto, no es una lista cerrada.
 
 ## Contacto

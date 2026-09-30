@@ -203,7 +203,26 @@ html {
   /* El navbar es fijo (h-16): sin esto los enlaces de ancla dejan el título
      escondido debajo de la barra. */
   scroll-padding-top: 6rem;
+  /* Barra de scroll fina, la misma convención que omnicanal-demo
+     (frontend/src/index.css): pulgar translúcido del color del texto. */
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-steel-100) 28%, transparent) transparent;
 }
+
+/* Para contenedores con scroll propio (ej. mensajes del chat): barra delgada
+   (6 px) y SIN las flechitas ▲▼ de Chromium/Safari clásico. Con `scrollbar-width`
+   los navegadores nuevos ignoran las reglas ::-webkit-. */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--color-steel-100) 34%, transparent) transparent;
+}
+.custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-steel-100) 34%, transparent);
+  border-radius: 999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--color-ember-400); }
+.custom-scrollbar::-webkit-scrollbar-button { display: none !important; }
 
 body {
   background-color: var(--color-steel-950);
