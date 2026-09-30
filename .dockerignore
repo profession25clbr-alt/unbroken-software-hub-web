@@ -9,6 +9,8 @@ docs
 *.md
 server/test-fallback.log
 server/test-fallback.mjs
+server/test-carga.log
+server/test-carga.mjs
 Dockerfile
 docker-compose.yml
 .dockerignore
