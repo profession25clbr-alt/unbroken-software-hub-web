@@ -1,0 +1,3 @@
+# Scripts de shell y Dockerfile siempre con LF (con CRLF fallan en bash/Linux)
+*.sh text eol=lf
+Dockerfile text eol=lf
