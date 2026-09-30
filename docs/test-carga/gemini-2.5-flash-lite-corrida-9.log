@@ -1,0 +1,8 @@
+=== Prueba de Gemma iniciada 2026-09-30T22:22:19.548Z | 3 por variante, 3000ms entre peticiones ===
+
+
+##### gemini-2.5-flash-lite
+A base (systemInstruction, 1 turno): 0/3 OK | latencia mediana 0ms, máx 0ms | errores: {"404 This model models/gemini-2.5-flash-lite is no longer available to new users. Please update":3}
+
+--- Resumen ---
+gemini-2.5-flash-lite | A base (systemInstruction, 1 turno): 0/3 OK | latencia mediana 0ms, máx 0ms | errores: {"404 This model models/gemini-2.5-flash-lite is no longer available to new users. Please update":3}

@@ -1,0 +1,10 @@
+=== Prueba de Gemma iniciada 2026-09-30T22:10:16.957Z | 6 por variante, 8000ms entre peticiones ===
+
+
+##### gemma-4-26b-a4b-it
+A base (systemInstruction, 1 turno): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":6}
+H mínima (solo 'Hola', sin system ni config): 1/6 OK | latencia mediana 5810ms, máx 5810ms | errores: {"500 Internal error encountered.":5}
+
+--- Resumen ---
+gemma-4-26b-a4b-it | A base (systemInstruction, 1 turno): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":6}
+gemma-4-26b-a4b-it | H mínima (solo 'Hola', sin system ni config): 1/6 OK | latencia mediana 5810ms, máx 5810ms | errores: {"500 Internal error encountered.":5}

@@ -22,7 +22,7 @@ if (!KEY) {
 const MODELS = (process.env.TEST_MODELS || "gemma-4-26b-a4b-it,gemma-4-31b-it").split(",")
 const N = Number(process.env.TEST_N || 6)
 const GAP_MS = Number(process.env.TEST_GAP_MS || 2500)
-const TIMEOUT_MS = 60000
+const TIMEOUT_MS = Number(process.env.TEST_TIMEOUT_MS || 60000)
 
 const company = readFileSync(join(__dirname, "context", "company.md"), "utf-8")
 const SYSTEM = `Eres el asistente virtual del sitio web de Unbroken Software Hub.

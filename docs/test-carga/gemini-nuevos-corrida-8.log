@@ -1,0 +1,16 @@
+=== Prueba de Gemma iniciada 2026-09-30T22:16:26.289Z | 5 por variante, 13000ms entre peticiones ===
+
+
+##### gemini-3.6-flash
+A base (systemInstruction, 1 turno): 3/5 OK | latencia mediana 5291ms, máx 9907ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":2}
+
+##### gemini-3.7-flash
+A base (systemInstruction, 1 turno): 0/5 OK | latencia mediana 0ms, máx 0ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":5}
+
+##### gemini-3.8-flash
+A base (systemInstruction, 1 turno): 0/5 OK | latencia mediana 0ms, máx 0ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":5}
+
+--- Resumen ---
+gemini-3.6-flash | A base (systemInstruction, 1 turno): 3/5 OK | latencia mediana 5291ms, máx 9907ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":2}
+gemini-3.7-flash | A base (systemInstruction, 1 turno): 0/5 OK | latencia mediana 0ms, máx 0ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":5}
+gemini-3.8-flash | A base (systemInstruction, 1 turno): 0/5 OK | latencia mediana 0ms, máx 0ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":5}

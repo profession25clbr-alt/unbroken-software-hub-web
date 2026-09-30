@@ -1,0 +1,8 @@
+=== Prueba de Gemma iniciada 2026-09-30T22:30:01.675Z | 4 por variante, 13000ms entre peticiones ===
+
+
+##### gemini-3.6-flash
+A base (systemInstruction, 1 turno): 4/4 OK | latencia mediana 4341ms, máx 5673ms
+
+--- Resumen ---
+gemini-3.6-flash | A base (systemInstruction, 1 turno): 4/4 OK | latencia mediana 4341ms, máx 5673ms

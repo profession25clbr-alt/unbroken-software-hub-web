@@ -1,0 +1,10 @@
+=== Prueba de Gemma iniciada 2026-09-30T22:12:17.154Z | 3 por variante, 8000ms entre peticiones ===
+
+
+##### gemma-4-31b-it
+A base (systemInstruction, 1 turno): 1/3 OK | latencia mediana 95573ms, máx 95573ms | errores: {"500 Internal error encountered.":2}
+G base + thinkingLevel minimal: 1/3 OK | latencia mediana 34071ms, máx 34071ms | errores: {"500 Internal error encountered.":2}
+
+--- Resumen ---
+gemma-4-31b-it | A base (systemInstruction, 1 turno): 1/3 OK | latencia mediana 95573ms, máx 95573ms | errores: {"500 Internal error encountered.":2}
+gemma-4-31b-it | G base + thinkingLevel minimal: 1/3 OK | latencia mediana 34071ms, máx 34071ms | errores: {"500 Internal error encountered.":2}
