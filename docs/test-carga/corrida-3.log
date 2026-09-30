@@ -1,0 +1,35 @@
+=== Prueba de carga iniciada 2026-09-30T21:06:39.071Z ===
+Endpoint: http://localhost:8798/api/chat | usuarios=5 | 1 mensaje cada 12s | 5 c/u
+
+[t=  2.2s] usuario 1 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2150ms
+[t=  4.4s] usuario 2 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2028ms
+[t=  6.8s] usuario 3 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2023ms
+[t=  9.3s] usuario 4 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2060ms
+[t= 11.6s] usuario 5 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2026ms
+[t= 16.2s] usuario 1 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2027ms
+[t= 18.5s] usuario 2 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2023ms
+[t= 20.9s] usuario 3 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2023ms
+[t= 23.3s] usuario 4 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2024ms
+[t= 25.7s] usuario 5 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2020ms
+[t= 30.2s] usuario 1 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2040ms
+[t= 32.5s] usuario 2 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2011ms
+[t= 34.9s] usuario 3 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2021ms
+[t= 37.3s] usuario 4 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2009ms
+[t= 39.7s] usuario 5 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2031ms
+[t= 44.3s] usuario 1 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2022ms
+[t= 46.5s] usuario 2 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2025ms
+[t= 48.9s] usuario 3 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2029ms
+[t= 51.4s] usuario 4 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2029ms
+[t= 53.8s] usuario 5 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2032ms
+[t= 58.3s] usuario 1 msg 5/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2033ms
+[t= 60.6s] usuario 2 msg 5/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2017ms
+[t= 63.0s] usuario 3 msg 5/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2025ms
+[t= 65.4s] usuario 4 msg 5/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2028ms
+[t= 67.8s] usuario 5 msg 5/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2030ms
+
+--- Resumen ---
+Peticiones: 25 | duración total: 67.8s
+  gemini-3.5-flash-lite: 25
+Latencia de las respuestas OK: mediana 2026ms | p90 2040ms | máx 2150ms
+Cambios de modelo activo (por orden de llegada):
+  t=0.0s -> gemini-3.5-flash-lite

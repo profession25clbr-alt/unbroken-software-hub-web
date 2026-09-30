@@ -59,7 +59,13 @@ const MIN_RESPONSE_MS = Number(process.env.CHAT_MIN_RESPONSE_MS || 2000)
 // Un modelo que devolvió 429 se salta durante este tiempo, sin gastar otra
 // petición para enterarse de lo mismo.
 const COOLDOWN_MS = 60_000
+// Un modelo que falló con 5xx se salta menos tiempo: suele ser un error pasajero.
+const ERROR_COOLDOWN_MS = 15_000
 const cooldownUntil = new Map()
+
+// Tope de espera por intento. En pruebas gemma-4-31b-it llegó a tardar 57 s
+// (nginx corta a los 60 s): si un modelo no responde a tiempo se pasa al siguiente.
+const GEMINI_TIMEOUT_MS = Number(process.env.GEMINI_TIMEOUT_MS || 15000)
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
@@ -91,6 +97,7 @@ async function llamarGemini(model, requestBody) {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-goog-api-key": GEMINI_API_KEY },
       body: requestBody,
+      signal: AbortSignal.timeout(GEMINI_TIMEOUT_MS),
     })
     if (response.ok || response.status !== 503) break
     await sleep(1000 * (attempt + 1))
@@ -142,15 +149,24 @@ app.post("/api/chat", chatLimiter, async (req, res) => {
     let response
     let usedModel
 
-    for (const model of candidatos) {
-      response = await llamarGemini(model, requestBody)
+    for (const [i, model] of candidatos.entries()) {
+      try {
+        response = await llamarGemini(model, requestBody)
+      } catch (err) {
+        // Timeout o corte de red: se trata como un 504 de ESTE modelo.
+        console.warn(`${model} no respondió (${err.name}).`)
+        response = new Response(null, { status: 504 })
+      }
       usedModel = model
 
-      // 429 = se acabó la cuota de ESTE modelo puntual: se prueba el siguiente
-      // en vez de devolver error al visitante.
-      if (response.status !== 429) break
-      cooldownUntil.set(model, Date.now() + COOLDOWN_MS)
-      console.warn(`Cuota agotada en ${model}, en enfriamiento ${COOLDOWN_MS / 1000}s. Probando siguiente modelo.`)
+      // 429 = se acabó la cuota de ESTE modelo puntual; 5xx = el modelo falló
+      // (los Gemma devuelven 500 "Internal error" de a ratos). En los dos casos se
+      // prueba el siguiente en vez de devolver error al visitante.
+      if (response.status !== 429 && response.status < 500) break
+      const enfriamiento = response.status === 429 ? COOLDOWN_MS : ERROR_COOLDOWN_MS
+      cooldownUntil.set(model, Date.now() + enfriamiento)
+      console.warn(`${model} devolvió ${response.status}, en enfriamiento ${enfriamiento / 1000}s. Probando siguiente modelo.`)
+      if (i < candidatos.length - 1) await response.body?.cancel()
     }
 
     if (!response.ok) {

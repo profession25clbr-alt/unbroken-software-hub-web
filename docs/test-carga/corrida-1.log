@@ -1,0 +1,38 @@
+=== Prueba de carga iniciada 2026-09-30T21:02:19.259Z ===
+Endpoint: http://localhost:8798/api/chat | usuarios=5 | 1 mensaje cada 12s | 5 c/u
+
+[t=  2.2s] usuario 1 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2185ms
+[t=  4.4s] usuario 2 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2020ms
+[t=  6.8s] usuario 3 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2019ms
+[t=  9.2s] usuario 4 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2027ms
+[t= 11.6s] usuario 5 msg 1/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2025ms
+[t= 16.2s] usuario 1 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2016ms
+[t= 18.5s] usuario 2 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2026ms
+[t= 23.3s] usuario 4 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2009ms
+[t= 25.7s] usuario 5 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2026ms
+[t= 27.1s] usuario 3 msg 2/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 8227ms
+[t= 30.2s] usuario 1 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2021ms
+[t= 32.5s] usuario 2 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2021ms
+[t= 37.3s] usuario 4 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2024ms
+[t= 39.7s] usuario 5 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2023ms
+[t= 41.1s] usuario 3 msg 3/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2020ms
+[t= 44.3s] usuario 1 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2028ms
+[t= 46.5s] usuario 2 msg 4/5 -> HTTP 200 modelo=gemini-3.5-flash-lite 2022ms
+[t= 51.5s] usuario 4 msg 4/5 -> HTTP 502 modelo=gemma-4-26b-a4b-it 2170ms error="El asistente no está disponible en este momento."
+[t= 53.7s] usuario 5 msg 4/5 -> HTTP 502 modelo=gemma-4-26b-a4b-it 2026ms error="El asistente no está disponible en este momento."
+[t= 55.1s] usuario 3 msg 4/5 -> HTTP 502 modelo=gemma-4-26b-a4b-it 2018ms error="El asistente no está disponible en este momento."
+[t= 58.3s] usuario 1 msg 5/5 -> HTTP 502 modelo=gemma-4-26b-a4b-it 2023ms error="El asistente no está disponible en este momento."
+[t= 60.6s] usuario 2 msg 5/5 -> HTTP 502 modelo=gemma-4-26b-a4b-it 2020ms error="El asistente no está disponible en este momento."
+[t= 66.3s] usuario 4 msg 5/5 -> HTTP 200 modelo=gemma-4-26b-a4b-it 2793ms
+[t= 67.7s] usuario 5 msg 5/5 -> HTTP 502 modelo=gemma-4-26b-a4b-it 2007ms error="El asistente no está disponible en este momento."
+[t= 69.2s] usuario 3 msg 5/5 -> HTTP 200 modelo=gemma-4-26b-a4b-it 2026ms
+
+--- Resumen ---
+Peticiones: 25 | duración total: 69.2s
+  gemini-3.5-flash-lite: 17
+  HTTP 502: 6
+  gemma-4-26b-a4b-it: 2
+Latencia de las respuestas OK: mediana 2024ms | p90 2793ms | máx 8227ms
+Cambios de modelo activo (por orden de llegada):
+  t=0.0s -> gemini-3.5-flash-lite
+  t=63.5s -> gemma-4-26b-a4b-it
