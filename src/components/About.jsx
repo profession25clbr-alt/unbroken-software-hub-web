@@ -16,7 +16,7 @@ export default function About() {
             <div className="h-24 w-24 shrink-0 rounded-full p-[2px] bg-gradient-to-br from-ember-400 to-gold-400">
               <img
                 src="/images/founder.jpg"
-                alt="Fundador de Unbroken Software Hub"
+                alt="Matheus de Lara André, fundador de Unbroken Software Hub"
                 width="240"
                 height="240"
                 loading="lazy"
@@ -25,7 +25,7 @@ export default function About() {
               />
             </div>
             <div>
-              <p className="text-base text-steel-300">Fundador de Unbroken Software Hub</p>
+              <p className="font-display text-xl font-semibold text-steel-100">Matheus de Lara André</p>
             </div>
           </div>
 
