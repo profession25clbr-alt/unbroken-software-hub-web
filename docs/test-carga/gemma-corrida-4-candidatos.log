@@ -1,0 +1,20 @@
+=== Prueba de Gemma iniciada 2026-09-30T21:34:56.533Z | 4 por variante, 3000ms entre peticiones ===
+
+
+##### gemini-3.1-flash-lite
+A base (systemInstruction, 1 turno): 2/4 OK | latencia mediana 18933ms, máx 18933ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":2}
+
+##### gemini-2.5-flash-lite
+A base (systemInstruction, 1 turno): 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"404 This model models/gemini-2.5-flash-lite is no longer available to new users. Please update":4}
+
+##### gemini-2.5-flash
+A base (systemInstruction, 1 turno): 4/4 OK | latencia mediana 1621ms, máx 24363ms
+
+##### gemini-3.5-flash
+A base (systemInstruction, 1 turno): 2/4 OK | latencia mediana 12776ms, máx 12776ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":2}
+
+--- Resumen ---
+gemini-3.1-flash-lite | A base (systemInstruction, 1 turno): 2/4 OK | latencia mediana 18933ms, máx 18933ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":2}
+gemini-2.5-flash-lite | A base (systemInstruction, 1 turno): 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"404 This model models/gemini-2.5-flash-lite is no longer available to new users. Please update":4}
+gemini-2.5-flash | A base (systemInstruction, 1 turno): 4/4 OK | latencia mediana 1621ms, máx 24363ms
+gemini-3.5-flash | A base (systemInstruction, 1 turno): 2/4 OK | latencia mediana 12776ms, máx 12776ms | errores: {"503 This model is currently experiencing high demand. Spikes in demand are usually temporary. ":2}

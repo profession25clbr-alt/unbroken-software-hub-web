@@ -1,0 +1,16 @@
+=== Prueba de Gemma iniciada 2026-09-30T21:29:51.864Z | 4 por variante, 6000ms entre peticiones ===
+
+
+##### gemma-4-26b-a4b-it
+F base + thinkingBudget 0 (sin razonamiento): 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"400 Thinking budget is not supported for this model.":4}
+G base + thinkingLevel minimal: 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":4}
+
+##### gemma-4-31b-it
+F base + thinkingBudget 0 (sin razonamiento): 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"400 Thinking budget is not supported for this model.":4}
+G base + thinkingLevel minimal: 2/4 OK | latencia mediana 11035ms, máx 11035ms | errores: {"500 Internal error encountered.":2}
+
+--- Resumen ---
+gemma-4-26b-a4b-it | F base + thinkingBudget 0 (sin razonamiento): 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"400 Thinking budget is not supported for this model.":4}
+gemma-4-26b-a4b-it | G base + thinkingLevel minimal: 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":4}
+gemma-4-31b-it | F base + thinkingBudget 0 (sin razonamiento): 0/4 OK | latencia mediana 0ms, máx 0ms | errores: {"400 Thinking budget is not supported for this model.":4}
+gemma-4-31b-it | G base + thinkingLevel minimal: 2/4 OK | latencia mediana 11035ms, máx 11035ms | errores: {"500 Internal error encountered.":2}

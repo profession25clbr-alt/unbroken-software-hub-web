@@ -1,0 +1,28 @@
+=== Prueba de Gemma iniciada 2026-09-30T21:20:03.502Z | 6 por variante, 2500ms entre peticiones ===
+
+
+##### gemma-4-26b-a4b-it
+A base (systemInstruction, 1 turno): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":6}
+B con historial (systemInstruction, 3 turnos): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":6}
+C sin systemInstruction (contexto en el 1er mensaje): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":1,"429 You exceeded your current quota, please check your plan and billing details. For more info":5}
+D base sin generationConfig: 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"429 You exceeded your current quota, please check your plan and billing details. For more info":3,"500 Internal error encountered.":3}
+E concurrente (5 a la vez, base): 2/5 OK en 2017ms | 500/357ms 200/2016ms 500/1071ms 500/992ms 200/1307ms
+
+##### gemma-4-31b-it
+A base (systemInstruction, 1 turno): 1/6 OK | latencia mediana 48197ms, máx 48197ms | errores: {"500 Internal error encountered.":5}
+B con historial (systemInstruction, 3 turnos): 1/6 OK | latencia mediana 58983ms, máx 58983ms | errores: {"500 Internal error encountered.":5}
+C sin systemInstruction (contexto en el 1er mensaje): 2/6 OK | latencia mediana 44328ms, máx 44328ms | errores: {"500 Internal error encountered.":3,"0 TimeoutError":1}
+D base sin generationConfig: 2/6 OK | latencia mediana 49722ms, máx 49722ms | errores: {"500 Internal error encountered.":4}
+E concurrente (5 a la vez, base): 0/5 OK en 6739ms | 500/504ms 500/1217ms 500/1790ms 500/6737ms 500/3431ms
+
+--- Resumen ---
+gemma-4-26b-a4b-it | A base (systemInstruction, 1 turno): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":6}
+gemma-4-26b-a4b-it | B con historial (systemInstruction, 3 turnos): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":6}
+gemma-4-26b-a4b-it | C sin systemInstruction (contexto en el 1er mensaje): 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"500 Internal error encountered.":1,"429 You exceeded your current quota, please check your plan and billing details. For more info":5}
+gemma-4-26b-a4b-it | D base sin generationConfig: 0/6 OK | latencia mediana 0ms, máx 0ms | errores: {"429 You exceeded your current quota, please check your plan and billing details. For more info":3,"500 Internal error encountered.":3}
+gemma-4-26b-a4b-it | E concurrente (5 a la vez, base): 2/5 OK en 2017ms | 500/357ms 200/2016ms 500/1071ms 500/992ms 200/1307ms
+gemma-4-31b-it | A base (systemInstruction, 1 turno): 1/6 OK | latencia mediana 48197ms, máx 48197ms | errores: {"500 Internal error encountered.":5}
+gemma-4-31b-it | B con historial (systemInstruction, 3 turnos): 1/6 OK | latencia mediana 58983ms, máx 58983ms | errores: {"500 Internal error encountered.":5}
+gemma-4-31b-it | C sin systemInstruction (contexto en el 1er mensaje): 2/6 OK | latencia mediana 44328ms, máx 44328ms | errores: {"500 Internal error encountered.":3,"0 TimeoutError":1}
+gemma-4-31b-it | D base sin generationConfig: 2/6 OK | latencia mediana 49722ms, máx 49722ms | errores: {"500 Internal error encountered.":4}
+gemma-4-31b-it | E concurrente (5 a la vez, base): 0/5 OK en 6739ms | 500/504ms 500/1217ms 500/1790ms 500/6737ms 500/3431ms
