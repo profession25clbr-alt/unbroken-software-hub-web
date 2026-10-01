@@ -23,6 +23,9 @@ env:
   IMAGE_REPO: multiuso-unbroken
   IMAGE_PREFIX: unbroken-web
   SITE_DIR: /opt/sites/unbroken-web
+  # IndexNow: la clave es publica por diseno (el mismo valor esta en public/<clave>.txt).
+  SITE_HOST: unbrokensoftwarehub.cl
+  INDEXNOW_KEY: a8bb3c6823420ddf09d61ad4244aacd7
 
 jobs:
   build-and-deploy:
@@ -121,3 +124,14 @@ jobs:
 
           rm -f deploy.env
           echo "✅ Deploy completado — Unbroken Web ${{ steps.vars.outputs.tag }}"
+
+      # Avisa a Bing (y a los buscadores que usan IndexNow) de que el sitio cambio, para
+      # que lo vuelvan a rastrear sin esperar. Si falla NO se cae el deploy: ya quedo
+      # publicado y esto es solo un aviso.
+      - name: Notify IndexNow
+        continue-on-error: true
+        run: |
+          curl -fsS -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' \
+            -d "{\"host\":\"$SITE_HOST\",\"key\":\"$INDEXNOW_KEY\",\"keyLocation\":\"https://$SITE_HOST/$INDEXNOW_KEY.txt\",\"urlList\":[\"https://$SITE_HOST/\"]}" \
+            -w 'IndexNow HTTP %{http_code}\n'

@@ -289,6 +289,7 @@ tag UW1.0.0
 3. docker compose pull && up -d
 4. espera a /healthz; si no responde, el job falla y muestra los logs
 5. limpia imágenes sin uso de más de 7 días
+6. avisa a Bing por IndexNow de que el sitio cambió (si falla, no se cae el deploy)
 ```
 
 - **Siempre la misma tag**: cada cambio se commitea, se hace push a `main` y se borra y recrea `UW1.0.0` para reemplazar la imagen. Lo hace `./deploy.sh "mensaje"`.
