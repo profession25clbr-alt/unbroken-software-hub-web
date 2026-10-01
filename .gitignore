@@ -29,3 +29,6 @@ dist-ssr
 # Log de la ultima prueba de carga (las corridas documentadas estan en docs/test-carga/)
 server/test-carga.log
 server/test-gemma.log
+
+# Documentos internos: solo en local, nunca en el repo
+docs/internos/

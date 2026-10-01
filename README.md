@@ -209,7 +209,7 @@ Los límites de cada modelo (por minuto, tokens por minuto y por día) y los res
 
 ### Privacidad
 
-Los mensajes se envían a un proveedor de IA externo para generar la respuesta; el servidor no los guarda. El widget avisa al usuario y le pide no compartir datos personales ni información sensible. Con datos reales de terceros aplicaría la **Ley 21.719** (Protección de Datos Personales, Chile); ver [`docs/cumplimiento-legal-ciberseguridad-2026.md`](docs/cumplimiento-legal-ciberseguridad-2026.md).
+Los mensajes se envían a un proveedor de IA externo para generar la respuesta; el servidor no los guarda. El widget avisa al usuario y le pide no compartir datos personales ni información sensible. Con datos reales de terceros aplicaría la **Ley 21.719** (Protección de Datos Personales, Chile).
 
 ---
 
@@ -380,7 +380,6 @@ Se usa **una sola tag de despliegue, `UW1.0.0`**, que se borra y se recrea en ca
 | [`docs/test-carga-5-usuarios.md`](docs/test-carga-5-usuarios.md) | Prueba de carga con 5 visitantes durante un minuto |
 | [`docs/test-gemma-fallback.md`](docs/test-gemma-fallback.md) | Por qué fallan los Gemma y qué modelo usar en su lugar |
 | [`docs/visibilidad-en-ias-geo.md`](docs/visibilidad-en-ias-geo.md) | Prerender, FAQ y estrategia para aparecer en IAs |
-| [`docs/cumplimiento-legal-ciberseguridad-2026.md`](docs/cumplimiento-legal-ciberseguridad-2026.md) | Ley 21.663 y Ley 21.719: qué aplica al sitio |
 
 ---
 
