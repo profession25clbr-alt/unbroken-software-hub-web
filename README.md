@@ -205,7 +205,15 @@ gemini-3.5-flash-lite → gemini-2.5-flash → gemini-3.6-flash → gemma-4-31b-
 | Límite por IP | 10 peticiones por minuto (429 al excederlo) |
 | Tiempo mínimo de respuesta | 2 s (frena el spam rápido sin castigar conexiones lentas) |
 
-Los límites de cada modelo (por minuto, tokens por minuto y por día) y los resultados de las pruebas están en [`docs/modelos-ia-limites.md`](docs/modelos-ia-limites.md).
+Límites del tier gratuito de cada modelo (Google AI Studio):
+
+| Modelo | Peticiones/min | Tokens/min | Peticiones/día |
+|---|---|---|---|
+| Gemini 3.5 Flash Lite | 15 | 250K | 500 |
+| Gemini 3.6 / 3.7 / 3.8 Flash | 5 | 250K | 20 |
+| Gemma 4 31B y 26B | 30 | 16K | 14.400 |
+
+Notas: Gemini 2.5 Flash no tiene la cuota anotada (solo se comprobó que responde); Gemini 2.5 Flash Lite devuelve 404 («ya no está disponible para cuentas nuevas»). Cada petición del chat lleva ~1,3K tokens de contexto, así que el tope de 16K tokens/min de Gemma se alcanza con solo 4-5 peticiones por minuto.
 
 ### Privacidad
 
@@ -238,7 +246,7 @@ Hero · Servicios · Automatización · Planes · Proceso · Sobre mí · cinta 
 
 La landing era una SPA con el `<body>` vacío: los rastreadores de IA (GPTBot, PerplexityBot, ClaudeBot) no ejecutan JavaScript y no veían texto. Se resolvió con **prerender al compilar**: `dist/index.html` trae ~49 KB de HTML con `<h1>`, 8 encabezados de sección y las 7 preguntas frecuentes; en el navegador, React monta con `createRoot` y reemplaza ese HTML (sin hidratación).
 
-Además: datos estructurados `ProfessionalService` (con logo y fundador) y `FAQPage`, `sitemap.xml`, `robots.txt` (bloquea `/api/`), canonical y tarjetas Open Graph/Twitter. Detalle, evaluación de consejos y pendientes en [`docs/visibilidad-en-ias-geo.md`](docs/visibilidad-en-ias-geo.md).
+Además: datos estructurados `ProfessionalService` (con logo y fundador) y `FAQPage`, `sitemap.xml`, `robots.txt` (bloquea `/api/`), canonical y tarjetas Open Graph/Twitter.
 
 Verificar qué ve un rastreador sin JavaScript:
 
@@ -258,7 +266,7 @@ No hay pruebas unitarias ni e2e automatizadas todavía. Hay **scripts de prueba 
 | `server/test-carga.mjs` | Simula N visitantes (IPs distintas) conversando durante un minuto y resume qué modelo respondió, latencias y errores |
 | `server/test-gemma.mjs` | Llama directo a la API con variantes de la petición para aislar fallas de un modelo |
 
-Resultados y logs: `docs/test-carga-5-usuarios.md`, `docs/test-gemma-fallback.md`, `docs/test-fallback-modelos.md` y `docs/test-carga/`.
+Los logs de las corridas están en `docs/test-carga/`.
 
 Reproducir la prueba de carga (en una instancia local, que permite simular IPs con `X-Forwarded-For`):
 
@@ -361,7 +369,7 @@ Se usa **una sola tag de despliegue, `UW1.0.0`**, que se borra y se recrea en ca
 
 ## Estado y límites conocidos
 
-- **Los Gemma de la API son inestables** (errores 500 frecuentes y `gemma-4-31b-it` tarda 40-60 s): quedan solo como último recurso. Detalle en `docs/test-gemma-fallback.md`.
+- **Los Gemma de la API son inestables** (errores 500 frecuentes y `gemma-4-31b-it` tarda 40-60 s): quedan solo como último recurso.
 - **Los Gemini 3.6/3.7/3.8 Flash permiten solo 20 peticiones por día**: sirven de colchón, no de modelo principal.
 - **La cuota gratuita manda**: la cadena aguanta ~28 conversaciones por minuto y ~520 al día con Gemini estable. Con más tráfico habría que pasar a un plan de pago.
 - **Sin hidratación**: React reemplaza el HTML prerenderizado al cargar (por diseño, para evitar desajustes).
@@ -373,13 +381,7 @@ Se usa **una sola tag de despliegue, `UW1.0.0`**, que se borra y se recrea en ca
 
 ## Documentación adicional
 
-| Archivo | Contenido |
-|---|---|
-| [`docs/INDEX.md`](docs/INDEX.md) | Índice de todos los documentos |
-| [`docs/modelos-ia-limites.md`](docs/modelos-ia-limites.md) | Límites por minuto/día de cada modelo y resultados de las pruebas |
-| [`docs/test-carga-5-usuarios.md`](docs/test-carga-5-usuarios.md) | Prueba de carga con 5 visitantes durante un minuto |
-| [`docs/test-gemma-fallback.md`](docs/test-gemma-fallback.md) | Por qué fallan los Gemma y qué modelo usar en su lugar |
-| [`docs/visibilidad-en-ias-geo.md`](docs/visibilidad-en-ias-geo.md) | Prerender, FAQ y estrategia para aparecer en IAs |
+Las notas de trabajo (resultados de las pruebas de modelos, estrategia de visibilidad en IAs, etc.) se mantienen en local en `docs/` y **no se versionan** (están en `.gitignore`). Lo esencial está resumido en este README; los logs de las pruebas de carga están en `docs/test-carga/`.
 
 ---
 

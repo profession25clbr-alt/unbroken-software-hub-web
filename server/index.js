@@ -18,7 +18,7 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY
 // vez de fallar. Los Gemma tienen cuota mucho más generosa, por eso van de respaldo.
 // GEMINI_MODELS = lista separada por comas (así se cambia el orden sin tocar
 // código). Sin esa variable se usa la cadena por defecto (la recomendada tras las
-// pruebas, ver docs/modelos-ia-limites.md).
+// pruebas).
 const DEFAULT_CHAIN = ["gemini-3.5-flash-lite", "gemini-2.5-flash", "gemini-3.6-flash", "gemma-4-31b-it"]
 const MODEL_CHAIN = process.env.GEMINI_MODELS
   ? [...new Set(process.env.GEMINI_MODELS.split(",").map((m) => m.trim()).filter(Boolean))]
