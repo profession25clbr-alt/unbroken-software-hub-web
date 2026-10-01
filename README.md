@@ -108,8 +108,8 @@ El costo fijo del servidor es Docker (~90 MB), compartido entre todos los sitios
 ## Instalación
 
 ```bash
-git clone https://github.com/profession25clbr-alt/unbroken-software-web.git
-cd unbroken-software-web
+git clone https://github.com/profession25clbr-alt/unbroken-software-hub-web.git
+cd unbroken-software-hub-web
 npm install
 cp .env.example .env      # y completar GEMINI_API_KEY
 ```
