@@ -217,7 +217,7 @@ Los mensajes se envían a un proveedor de IA externo para generar la respuesta; 
 
 ### Secciones (en orden)
 
-Hero · Servicios · Automatización · Planes · Proceso · **Preguntas frecuentes** · Sobre mí · cinta de tecnologías · Footer, más los botones flotantes (WhatsApp, correo), el **chat** y un brillo ambiental de fondo.
+Hero · Servicios · Automatización · Planes · Proceso · Sobre mí · cinta de tecnologías · **Preguntas frecuentes** · Footer, más los botones flotantes (WhatsApp, correo), el **chat** y un brillo ambiental de fondo.
 
 ### Detalles de la interfaz
 

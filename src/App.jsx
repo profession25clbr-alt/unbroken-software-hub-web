@@ -31,9 +31,9 @@ export default function App() {
           <Automation />
           <Pricing />
           <Process />
-          <Faq />
           <About />
           <TechStack />
+          <Faq />
         </main>
         <Footer />
         <FloatingWhatsApp />
