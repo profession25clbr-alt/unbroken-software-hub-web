@@ -31,6 +31,23 @@ real, sin plantillas genéricas ni funcionalidades de más.
    contenido. Se evalúa junto al cliente qué tan grande es la necesidad y el
    costo real de resolverla — no se ofrece IA "porque sí".
 
+## Demo en vivo
+
+Hay una demo pública de un sistema a medida que cualquier visitante puede
+probar, con datos ficticios (no hay que ingresar datos personales reales):
+
+- **Tienda online**: https://omnicanal-demo.unbrokensoftwarehub.cl/ — tres
+  tiendas (tecnología, moda y alimentos) con catálogo, carrito, pago simulado
+  y seguimiento de pedidos.
+- **App de gestión para tiendas físicas**:
+  https://omnicanal-demo.unbrokensoftwarehub.cl/gestion/ — caja, inventario,
+  proveedores, órdenes de compra, pedidos online y reportes, con permisos por
+  rol. En la pantalla de ingreso hay botones con cuentas de prueba.
+
+Si alguien pregunta por ejemplos de lo que se puede construir, o por cómo se
+ve un sistema a medida, se puede compartir este enlace. Es una demostración,
+no un producto terminado para comprar tal cual.
+
 ## Forma de trabajo y pago
 
 No hay tarifas fijas de catálogo. Cada proyecto parte con un análisis de lo

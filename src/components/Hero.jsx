@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { DEMO_URL } from "./Demo"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -80,6 +81,26 @@ export default function Hero() {
             Ver servicios
           </a>
         </motion.div>
+
+        <motion.p
+          initial="hidden"
+          animate="show"
+          custom={4}
+          variants={fadeUp}
+          className="mt-6 text-base text-steel-300"
+        >
+          ¿Prefieres verlo funcionando?{" "}
+          <a
+            href={DEMO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-ember-400 underline-offset-4 transition-colors hover:text-ember-300 hover:underline"
+          >
+            Prueba la app demo
+            <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        </motion.p>
       </div>
     </section>
   )

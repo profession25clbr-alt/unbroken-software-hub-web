@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import Services from "./components/Services"
 import Automation from "./components/Automation"
+import Demo from "./components/Demo"
 import Pricing from "./components/Pricing"
 import Process from "./components/Process"
 import Faq from "./components/Faq"
@@ -29,6 +30,7 @@ export default function App() {
           <Hero />
           <Services />
           <Automation />
+          <Demo />
           <Pricing />
           <Process />
           <About />

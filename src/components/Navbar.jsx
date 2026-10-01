@@ -5,6 +5,7 @@ import ThemeSwitcher from "./ThemeSwitcher"
 const LINKS = [
   { href: "#servicios", label: "Servicios" },
   { href: "#automatizacion", label: "Automatización" },
+  { href: "#demo", label: "Demo" },
   { href: "#planes", label: "Planes" },
   { href: "#proceso", label: "Proceso" },
   { href: "#sobre-mi", label: "Sobre mí" },
