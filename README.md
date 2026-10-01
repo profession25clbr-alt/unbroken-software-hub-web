@@ -177,7 +177,7 @@ Internet ──443──▶ nginx (host) ──▶ 127.0.0.1:8101 ──▶ cont
 
 ## El chat con IA
 
-El asistente responde **solo con el contenido de `server/context/company.md`** (servicios, forma de pago, proceso, contacto). Cada petición envía ese documento como instrucción de sistema.
+El asistente responde **solo con el contenido de `server/context/company.md`** (servicios, forma de pago, proceso, contacto y la demo en vivo, cuyo enlace puede compartir). Cada petición envía ese documento como instrucción de sistema.
 
 ### Cadena de modelos
 
@@ -225,7 +225,9 @@ Los mensajes se envían a un proveedor de IA externo para generar la respuesta; 
 
 ### Secciones (en orden)
 
-Hero · Servicios · Automatización · Planes · Proceso · Sobre mí · cinta de tecnologías · **Preguntas frecuentes** · Footer, más los botones flotantes (WhatsApp, correo), el **chat** y un brillo ambiental de fondo.
+Hero · Servicios · Automatización · **Demo en vivo** · Planes · Proceso · Sobre mí · cinta de tecnologías · **Preguntas frecuentes** · Footer, más los botones flotantes (WhatsApp, correo), el **chat** y un brillo ambiental de fondo.
+
+La sección **Demo en vivo** (`src/components/Demo.jsx`) tiene dos tarjetas que abren en una pestaña nueva la tienda online y la app de gestión de la demo (https://omnicanal-demo.unbrokensoftwarehub.cl, que se aloja en este mismo servidor); el hero y el menú también la enlazan. No se publican credenciales: los logins de la demo traen botones con cuentas de prueba. Las URLs están en un solo lugar (`DEMO_URL` y `DEMO_GESTION_URL` de `Demo.jsx`).
 
 ### Detalles de la interfaz
 
