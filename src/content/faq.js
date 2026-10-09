@@ -13,7 +13,7 @@ export const FAQ = [
   },
   {
     q: "¿Cuánto cuesta un sistema o una página web?",
-    a: "No hay tarifas fijas de catálogo: cada proyecto parte con un análisis y de ahí se arma un plan de trabajo y de pago a medida. En las páginas web se parte con un plan estándar que incluye hosting y mantención, y las modificaciones van incluidas en el plan. Para una propuesta real se conversa el proyecto por WhatsApp o correo.",
+    a: "No hay tarifas fijas de catálogo: cada proyecto parte con un análisis y de ahí se arma un plan de trabajo y de pago a medida. En las páginas web se parte con un plan estándar que incluye hosting y mantención, y las modificaciones van incluidas en el plan. Para una propuesta real se conversa el proyecto por WhatsApp o correo, con los botones del sitio.",
   },
   {
     q: "¿Cómo es el proceso de trabajo?",
@@ -28,7 +28,11 @@ export const FAQ = [
     a: "Sí. Se conectan sistemas entre sí y con herramientas como WhatsApp, correo o planillas para que tareas repetitivas dejen de hacerse manualmente: recordatorios y reportes por correo, avisos automáticos por WhatsApp ante ciertas acciones y procesos propios de cada negocio.",
   },
   {
+    q: "¿Puedo probar un sistema a medida antes de contratar?",
+    a: "Sí. La sección Demo del sitio enlaza una demo en vivo con datos ficticios: una tienda online (tres tiendas con catálogo, carrito, pago simulado y seguimiento de pedidos) y una app de gestión para tiendas físicas (caja, inventario, proveedores, órdenes de compra, pedidos online y reportes, con permisos por rol). Es una demostración de lo que se puede construir, no un producto terminado para comprar tal cual.",
+  },
+  {
     q: "¿Cómo puedo contactarlos?",
-    a: "Por WhatsApp al +56 9 3414 2633 o por correo a profession25cl.br@gmail.com. También puedes usar el asistente de este sitio para resolver dudas iniciales.",
+    a: "Con los botones de WhatsApp y de correo que están en el sitio (al pulsarlos se abre la conversación directamente). También puedes usar el asistente de este sitio para resolver dudas iniciales.",
   },
 ]
